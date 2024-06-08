@@ -13,8 +13,8 @@ public class GamePiece : MonoBehaviour
         Gray
     }
     [field: SerializeField] public MatchValueEnum MatchValue { get; private set; }
-    public int x { get; private set; }
-    public int y { get; private set; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
     private RectTransform rectTransform;
     public bool IsMoving { get; private set; } = false;
 
@@ -34,14 +34,14 @@ public class GamePiece : MonoBehaviour
 
     public void SetCoord(int x, int y, float time = 0.5f)
     {
-        this.x = x;
-        this.y = y;
+        this.X = x;
+        this.Y = y;
         Move(0, 0, time);
     }
 
     public (int, int) GetCoord()
     {
-        return (x, y);
+        return (X, Y);
     }
 
     public void Move(int destX, int destY, float timeToMove)

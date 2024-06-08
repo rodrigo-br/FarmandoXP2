@@ -11,6 +11,7 @@ public class Board : MonoBehaviour
     [Range(1, 5)][SerializeField] private int height;
     [SerializeField] private GameObject tilePrefab;
     [SerializeField] private GameObject[] gamePiecePrefabs;
+    [SerializeField] private float moveTime = 0.4f;
     private RectTransform boardRectTransform;
     private float xOffset;
     private float yOffset;
@@ -19,7 +20,6 @@ public class Board : MonoBehaviour
     private GamePiece[,] gamePieces;
     private Tile clickedTile;
     private Tile targetTile;
-    private Vector2 clickedTileOriginalScale = Vector2.one;
 
     private void Awake()
     {
@@ -37,26 +37,22 @@ public class Board : MonoBehaviour
     {
         SetupTiles();
         FillRandom();
-        HighlightMatches();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            SwapGamePieces(gamePieces[0, 0], gamePieces[1, 0]);
-        }
     }
 
     private void SwapGamePieces(GamePiece gp1, GamePiece gp2)
     {
         if (gp1.IsMoving || gp2.IsMoving) { return; }
+        StartCoroutine(SwapGamePiecesCoroutine(gp1, gp2));
+    }
+
+    private IEnumerator SwapGamePiecesCoroutine(GamePiece gp1, GamePiece gp2)
+    {
         var (gp1X, gp1Y) = gp1.GetCoord();
         var (gp2X, gp2Y) = gp2.GetCoord();
         if (Mathf.Abs(gp1X - gp2X) + Mathf.Abs(gp1Y - gp2Y) > 1)
         {
             Debug.Log("Não pode mover");
-            return;
+            yield break;
         }
 
         RectTransform rectTransform1 = gp1.GetComponent<RectTransform>();
@@ -67,8 +63,13 @@ public class Board : MonoBehaviour
 
         gamePieces[gp1X, gp1Y] = gp2;
         gamePieces[gp2X, gp2Y] = gp1;
-        gp1.SetCoord(gp2X, gp2Y);
-        gp2.SetCoord(gp1X, gp1Y);
+        gp1.SetCoord(gp2X, gp2Y, moveTime);
+        gp2.SetCoord(gp1X, gp1Y, moveTime);
+
+        yield return new WaitForSeconds(moveTime + 0.1f);
+
+        HighlightMatchesAt(gp1.X, gp1.Y);
+        HighlightMatchesAt(gp2.X, gp2.Y);
     }
 
     private bool IsWithinBounds(int x, int y)
@@ -163,13 +164,14 @@ public class Board : MonoBehaviour
         {
             SwitchTiles(clickedTile, targetTile);
         }
+
+        clickedTile = null;
+        targetTile = null;
     }
 
     private void SwitchTiles(Tile checkClickedTile, Tile checkTargetTile)
     {
         SwapGamePieces(checkClickedTile.GetComponentInChildren<GamePiece>(), checkTargetTile.GetComponentInChildren<GamePiece>());
-        clickedTile = null;
-        targetTile = null;
     }
 
     private List<GamePiece> FindMatches(int startX, int startY, Vector2 searchDirection, int minLength = 3)
@@ -191,7 +193,7 @@ public class Board : MonoBehaviour
 
         int maxValue = (width > height) ? width : height;
 
-        for (int i = 1; i < maxValue; i++)
+        for (int i = 1; i < maxValue - 1; i++)
         {
             nextX = startX + (int)Mathf.Clamp(searchDirection.x, -1, 1) * i;
             nextY = startY + (int)Mathf.Clamp(searchDirection.y, -1, 1) * i;
@@ -206,7 +208,7 @@ public class Board : MonoBehaviour
             matches.Add(nextPiece);
         }
 
-        if (matches.Count > minLength)
+        if (matches.Count >= minLength)
         {
             return matches;
         }
@@ -218,12 +220,12 @@ public class Board : MonoBehaviour
         List<GamePiece> upwardMatches = FindMatches(startX, startY, Vector2.up, 2);
         List<GamePiece> downwardMatches = FindMatches(startX, startY, Vector2.down, 2);
 
-        if (upwardMatches == null) { upwardMatches = new List<GamePiece>(); }
-        if (downwardMatches == null) {  downwardMatches = new List<GamePiece>();}
+        upwardMatches ??= new();
+        downwardMatches ??= new();
 
         List<GamePiece> combinedMatches = upwardMatches.Union(downwardMatches).ToList();
 
-        return upwardMatches.Count >= minLength ? upwardMatches : null;
+        return combinedMatches.Count >= minLength ? combinedMatches : null;
     }
 
     private List<GamePiece> FindHorizontalMatches(int startX, int startY, int minLength = 3)
@@ -231,12 +233,24 @@ public class Board : MonoBehaviour
         List<GamePiece> rightMatches = FindMatches(startX, startY, Vector2.right, 2);
         List<GamePiece> leftMatches = FindMatches(startX, startY, Vector2.left, 2);
 
-        if (rightMatches == null) { rightMatches = new List<GamePiece>(); }
-        if (leftMatches == null) { leftMatches = new List<GamePiece>(); }
+        rightMatches ??= new();
+        leftMatches ??= new();
 
         List<GamePiece> combinedMatches = rightMatches.Union(leftMatches).ToList();
 
-        return rightMatches.Count >= minLength ? rightMatches : null;
+        return combinedMatches.Count >= minLength ? combinedMatches : null;
+    }
+
+    private void HighlightTileOff(int x, int y)
+    {
+        Image image = tiles[x, y].GetComponent<Image>();
+        image.color = new Color(image.color.r, image.color.g, image.color.b, 0);
+    }
+
+    private void HighlightTileOn(int x, int y, Color color)
+    {
+        Image image = tiles[x, y].GetComponent<Image>();
+        image.color = color;
     }
 
     private void HighlightMatches()
@@ -245,31 +259,35 @@ public class Board : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                Image image = gamePieces[i, j].GetComponent<Image>();
-                image.color = new Color(image.color.r, image.color.g, image.color.b, 0.1f);
+                HighlightMatchesAt(i, j);
             }
         }
-        for (int i = 0; i < width; i++)
+    }
+
+    private void HighlightMatchesAt(int x, int y)
+    {
+        HighlightTileOff(x, y);
+
+        List<GamePiece> combinedMatches = FindMacthesAt(x, y);
+
+        if (combinedMatches.Count > 0)
         {
-            for (int j = 0; j < height; j++)
+            foreach (GamePiece piece in combinedMatches)
             {
-                List<GamePiece> horizontalMatches = FindHorizontalMatches(i, j, 3);
-                List<GamePiece> verticalMatches = FindVerticalMatches(i, j, 3);
-
-                horizontalMatches ??= new();
-                verticalMatches ??= new();
-
-                var combinedMatches = horizontalMatches.Union(verticalMatches).ToList();
-
-                if (combinedMatches.Count > 0)
-                {
-                    foreach (GamePiece piece in combinedMatches)
-                    {
-                        Image image = piece.GetComponent<Image>();
-                        image.color = new Color(image.color.r, image.color.g, image.color.b, 1);
-                    }
-                }
+                HighlightTileOn(piece.X, piece.Y, piece.GetComponent<Image>().color);
             }
         }
+    }
+
+    private List<GamePiece> FindMacthesAt(int x, int y, int minLength = 3)
+    {
+        List<GamePiece> horizontalMatches = FindHorizontalMatches(x, y, minLength);
+        List<GamePiece> verticalMatches = FindVerticalMatches(x, y, minLength);
+
+        horizontalMatches ??= new();
+        verticalMatches ??= new();
+
+        var combinedMatches = horizontalMatches.Union(verticalMatches).ToList();
+        return combinedMatches;
     }
 }

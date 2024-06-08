@@ -1,28 +1,33 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, IPointerUpHandler
+public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public int x {  get; private set; }
-    public int y { get; private set; }
+    public int X { get; private set; }
+    public int Y { get; private set; }
     private Board board;
+    //private bool isPressingMouse = false;
+    private RectTransform rectTransform;
+    private Vector2 originalScale;
 
-    private void Start()
+    private void Awake()
     {
-        
+        rectTransform = this.GetComponent<RectTransform>();
+        originalScale = rectTransform.localScale;
     }
 
     public void Init(int x, int y, Board board)
     {
-        this.x = x;
-        this.y = y;
+        this.X = x;
+        this.Y = y;
         this.board = board;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
+    public void OnPointerDown(PointerEventData eventData)
     {
         if (board == null) { return; }
         board.ClickTile(this);
@@ -32,11 +37,6 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler, I
     {
         if (board == null) { return; }
         board.DragToTile(this);
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        throw new System.NotImplementedException();
     }
 
     public void OnPointerUp(PointerEventData eventData)
