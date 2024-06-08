@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -586718001501135233, guid: 4a477f992f1bc264b9da4d662e806f8e, type: 3}
+      propertyPath: <MatchValue>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5624609822582325944, guid: 4a477f992f1bc264b9da4d662e806f8e, type: 3}
       propertyPath: m_Name
       value: GreenPiece
