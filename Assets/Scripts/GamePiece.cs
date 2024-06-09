@@ -14,6 +14,7 @@ public enum MatchValueEnum
 public class GamePiece : MonoBehaviour
 {
     [field: SerializeField] public MatchValueEnum MatchValue { get; private set; }
+    [SerializeField] private int scorePoints = 20;
     public int X { get; private set; }
     public int Y { get; private set; }
     public RectTransform RectTransform { get; private set; }
@@ -70,5 +71,12 @@ public class GamePiece : MonoBehaviour
             yield return null;
         }
         IsMoving = false;
+    }
+
+    public void ScorePoints(int multiplier = 1, int bonus = 0)
+    {
+        if (ScoreManager.Instance == null) return;
+
+        ScoreManager.Instance.AddScore((scorePoints * multiplier) + bonus);
     }
 }

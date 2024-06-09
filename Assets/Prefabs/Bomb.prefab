@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MatchValue>k__BackingField: 0
+  scorePoints: 200
   <BombType>k__BackingField: 0
 --- !u!1001 &357829836558654416
 PrefabInstance:

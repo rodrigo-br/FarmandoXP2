@@ -36,6 +36,7 @@ public class Board : MonoBehaviour
     private bool playerInputEnabled = true;
     private bool playerInputBusy = false;
     private ParticleManager particleManager;
+    private int scoreMultiplier = 0;
 
     private void Awake()
     {
@@ -472,7 +473,14 @@ public class Board : MonoBehaviour
         {
             if (piece != null)
             {
+                int bonus = 0;
+
                 ClearPieceAt(piece.X, piece.Y);
+                if (gamePieces.Count >= 4)
+                {
+                    bonus = 20;
+                }
+                piece.ScorePoints(scoreMultiplier, bonus);
                 if (particleManager == null) continue;
                 if (bombedPieces.Contains(piece))
                 {
@@ -571,9 +579,10 @@ public class Board : MonoBehaviour
         playerInputBusy = true;
 
         List<GamePiece> matches = pieces;
-
+        scoreMultiplier = 0;
         do
         {
+            scoreMultiplier++;
             yield return StartCoroutine(ClearAndCollapseRoutine(matches));
             yield return null;
 
@@ -626,6 +635,7 @@ public class Board : MonoBehaviour
                 break;
             }
             yield return new WaitForSeconds(0.15f);
+            scoreMultiplier++;
             yield return StartCoroutine(ClearAndCollapseRoutine(matches));
         }
         yield return null;
@@ -759,18 +769,17 @@ public class Board : MonoBehaviour
         GameObject bomb = null;
         if (pieces.Count < 4) return bomb;
 
-        if (pieces.Count >= 5)
-        {
-            bomb = MakeBomb(coloredBombPrefab, x, y);
-            return bomb;
-        }
-
         if (IsCornerMatch(pieces))
         {
             bomb = MakeBomb(adjacentBombPrefabs[(int)pieces[0].MatchValue], x, y);
         }
         else
         {
+            if (pieces.Count >= 5)
+            {
+                bomb = MakeBomb(coloredBombPrefab, x, y);
+                return bomb;
+            }
             bomb = MakeBomb(thunderBombPrefabs[(int)pieces[0].MatchValue], x, y);
         }
 

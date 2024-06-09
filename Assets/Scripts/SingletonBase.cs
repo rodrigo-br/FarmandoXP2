@@ -26,7 +26,6 @@ public class SingletonBase<T> : MonoBehaviour where T : MonoBehaviour
         if (instance == null)
         {
             instance = this as T;
-            transform.parent = null;
             DontDestroyOnLoad(gameObject);
         }
         else
