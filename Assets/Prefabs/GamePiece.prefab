@@ -12,7 +12,8 @@ GameObject:
   - component: {fileID: 3041636881672680412}
   - component: {fileID: 8827831343454630818}
   - component: {fileID: -586718001501135233}
-  - component: {fileID: 4145634149700029866}
+  - component: {fileID: 6859461624761683446}
+  - component: {fileID: 6324610189599908328}
   m_Layer: 5
   m_Name: GamePiece
   m_TagString: Untagged
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <MatchValue>k__BackingField: 0
---- !u!114 &4145634149700029866
+--- !u!114 &6859461624761683446
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -99,7 +100,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 5624609822582325944}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e05706b1b6e2664d95d72f696ebfedc, type: 3}
+  m_Script: {fileID: 11500000, guid: 89863511be1eb6643add7a1217c2b3ac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   image: {fileID: 8827831343454630818}
+--- !u!114 &6324610189599908328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5624609822582325944}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1484b23d7acfce4b894f658fc0f8c49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  image: {fileID: 8827831343454630818}
+  punch: {x: 1.37, y: 1.54, z: 1.3}
+  endValue: 1.5
+  DOScaleDuration: 0.5
