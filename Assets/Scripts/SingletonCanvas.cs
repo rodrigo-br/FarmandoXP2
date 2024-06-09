@@ -1,12 +1,11 @@
 using UnityEngine.SceneManagement;
 using UnityEngine;
 
-public class SingletonCanvas : SingletonBase<SingletonCanvas>
+public class SingletonCanvas : MonoBehaviour
 {
     private Canvas canvas;
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
         canvas = GetComponent<Canvas>();
     }
 

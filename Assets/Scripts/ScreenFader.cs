@@ -2,25 +2,36 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(MaskableGraphic))]
-public class ScreenFader : MonoBehaviour
+public class ScreenFader : SingletonBase<ScreenFader>
 {
     private readonly float solidAlpha = 1f;
     private readonly float clearAlpha = 0f;
     [SerializeField] private float delay = 0f;
     [SerializeField] private float timeToFade = 1f;
+    [SerializeField] private Image graphic;
 
-    MaskableGraphic graphic;
-
-    private void Awake()
+    public override void Awake()
     {
-        graphic = GetComponent<MaskableGraphic>();
+        base.Awake();
     }
 
     private IEnumerator FadeRoutine(float alpha)
     {
+        float startAlpha = graphic.color.a;
         yield return new WaitForSeconds(delay);
-        graphic.CrossFadeAlpha(alpha, timeToFade, true);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < timeToFade)
+        {
+            elapsedTime += Time.deltaTime;
+            float newAlpha = Mathf.Lerp(startAlpha, alpha, elapsedTime / timeToFade);
+            Color tempColor = graphic.color;
+            tempColor.a = newAlpha;
+            graphic.color = tempColor;
+            yield return null;
+        }
+
+        graphic.color = new Color(graphic.color.r, graphic.color.g, graphic.color.b, alpha);
     }
 
     public void FadeOn()

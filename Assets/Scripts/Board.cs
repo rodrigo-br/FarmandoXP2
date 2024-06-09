@@ -41,7 +41,6 @@ public class Board : MonoBehaviour
     private void Awake()
     {
         particleManager = GameObject.FindWithTag("ParticleManager").GetComponent<ParticleManager>();
-        Debug.Log(particleManager);
         tiles = new Tile[width, height];
         gamePieces = new GamePiece[width, height];
         boardRectTransform = GetComponent<RectTransform>();
@@ -52,7 +51,7 @@ public class Board : MonoBehaviour
         yOffset = (boardRectTransform.rect.height - (tileSize.y * height)) / 2 - boardRectTransform.rect.height / 2;
     }
 
-    private void Start()
+    public void SetupBoard()
     {
         SetupTiles();
         SetupGamePieces();

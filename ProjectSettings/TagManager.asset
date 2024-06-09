@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ParticleManager
   - ScoreManagerCanvas
+  - Board
   layers:
   - Default
   - TransparentFX
