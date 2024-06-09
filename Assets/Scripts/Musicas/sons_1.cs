@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
-public class sons_1 : MonoBehaviour
+public class sons_1 : SingletonBase<sons_1>
 {
     [SerializeField] AudioClip enemyShootClip;
     [SerializeField] AudioClip playerShootClip;
