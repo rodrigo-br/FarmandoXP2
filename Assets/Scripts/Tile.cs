@@ -11,13 +11,13 @@ public class Tile : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler, IP
     public int Y { get; private set; }
     private Board board;
     //private bool isPressingMouse = false;
-    private RectTransform rectTransform;
+    public RectTransform RectTransform { get; private set; }
     private Vector2 originalScale;
 
     private void Awake()
     {
-        rectTransform = this.GetComponent<RectTransform>();
-        originalScale = rectTransform.localScale;
+        RectTransform = this.GetComponent<RectTransform>();
+        originalScale = RectTransform.localScale;
     }
 
     public void Init(int x, int y, Board board)
