@@ -28,7 +28,7 @@ public class AnimOutline : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
             .SetLoops(-1, LoopType.Yoyo); // Animação vai e volta
 
         // Animação de distância do contorno
-        distanceTween = DOTween.To(() => outline.effectDistance, x => outline.effectDistance = x, new Vector2(5, 5), 0.5f)
+        distanceTween = DOTween.To(() => outline.effectDistance, x => outline.effectDistance = x, new Vector2(3, 3), 0.5f)
             .SetLoops(-1, LoopType.Yoyo); // Animação vai e volta
     }
     void AnimationOutlineOut(){

@@ -2,17 +2,18 @@
 using System.Collections;
 using UnityEngine;
 
+public enum MatchValueEnum
+{
+    Yellow,
+    Green,
+    Blue,
+    Red,
+    Purlple,
+    Gray
+}
+
 public class GamePiece : MonoBehaviour
 {
-    public enum MatchValueEnum
-    {
-        Yellow,
-        Green,
-        Blue,
-        Red,
-        Purlple,
-        Gray
-    }
     [field: SerializeField] public MatchValueEnum MatchValue { get; private set; }
     public int X { get; private set; }
     public int Y { get; private set; }
@@ -29,6 +30,11 @@ public class GamePiece : MonoBehaviour
         this.X = x;
         this.Y = y;
         Move(0, 0, time);
+    }
+
+    public void SetMatchValue(MatchValueEnum matchValue)
+    {
+        this.MatchValue = matchValue;
     }
 
     public (int, int) GetCoord()
