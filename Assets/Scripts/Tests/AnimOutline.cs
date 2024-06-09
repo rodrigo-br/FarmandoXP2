@@ -1,7 +1,4 @@
 using DG.Tweening;
-using System;
-using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -12,25 +9,35 @@ public class AnimOutline : MonoBehaviour , IPointerEnterHandler, IPointerExitHan
     private Outline outline;
     private Tweener colorTween;
     private Tweener distanceTween;
-    void Start()
+
+    private void OnDisable()
     {
-        
+        AnimationOutlineOut();
+    }
+
+    private void OnDestroy()
+    {
+        AnimationOutlineOut();
     }
 
     void AnimateOutlineEnter()
     {
+        if (outline == null) { return; }
         // Animação de cor do contorno
-        colorTween = outline.DOColor(Color.green, 1f)
+        colorTween = outline.DOColor(Color.green, 0.5f)
             .SetLoops(-1, LoopType.Yoyo); // Animação vai e volta
 
         // Animação de distância do contorno
-        distanceTween = DOTween.To(() => outline.effectDistance, x => outline.effectDistance = x, new Vector2(5, 5), 1f)
+        distanceTween = DOTween.To(() => outline.effectDistance, x => outline.effectDistance = x, new Vector2(5, 5), 0.5f)
             .SetLoops(-1, LoopType.Yoyo); // Animação vai e volta
     }
     void AnimationOutlineOut(){
-        colorTween.Kill();
-        distanceTween.Kill();
-        outline.effectColor = Color.black;
+        colorTween?.Kill();
+        distanceTween?.Kill();
+        if (outline != null)
+        {
+            outline.effectColor = Color.black;
+        }
     }
     public void OnPointerEnter(PointerEventData eventData)
     {
