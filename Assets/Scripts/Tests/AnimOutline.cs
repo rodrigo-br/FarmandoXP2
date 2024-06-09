@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class AnimOutline : MonoBehaviour
+public class AnimOutline : MonoBehaviour , IPointerEnterHandler, IPointerExitHandler
 {
     [SerializeField] private Image image;
     private Outline outline;
