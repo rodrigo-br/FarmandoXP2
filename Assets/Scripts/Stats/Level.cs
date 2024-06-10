@@ -7,7 +7,7 @@ public class Level
     private int baseExperience;
     private int experienceFactor;
 
-    Level(int level, int baseExperience, int experienceFactor)
+    public Level(int level, int baseExperience, int experienceFactor)
     {
         this.level = level;
         this.baseExperience = baseExperience;
@@ -38,7 +38,6 @@ public class Level
     public void AddExperience(int amount)
     {
         experience += amount;
-
         while (experience >= GetExperienceForNextLevel())
         {
             experience -= GetExperienceForNextLevel();
