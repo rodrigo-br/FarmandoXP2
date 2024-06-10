@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class ScoreManager : SingletonBase<ScoreManager>
 {
@@ -11,6 +12,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI timer;
+    private Image levelProgressBar;
     private Level level;
 
     public override void Awake()
@@ -39,6 +41,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
     {
         int currentLevel = level.GetLevel();
         level.AddExperience(value);
+        levelProgressBar.fillAmount = level.GetExperiencePercentage();
         currentScore += value;
         if (currentLevel < level.GetLevel())
         {
@@ -50,6 +53,8 @@ public class ScoreManager : SingletonBase<ScoreManager>
     public void UpdateLevelText()
     {
         gameObject.SetActive(true);
+        levelProgressBar = GameObject.FindWithTag("LevelProgressBar").GetComponent<Image>();
+        levelProgressBar.fillAmount = level.GetExperiencePercentage();
         levelText.text = $"Level {level.GetLevel() + 1}";
     }
 

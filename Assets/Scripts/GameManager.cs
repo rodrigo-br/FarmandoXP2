@@ -71,6 +71,7 @@ public class GameManager : SingletonBase<GameManager>
 
         if (board != null)
         {
+            timeLeft = 60;
             board.SetupBoard();
             ScoreManager.Instance.UpdateLevelText();
         }

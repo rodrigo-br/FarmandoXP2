@@ -44,4 +44,10 @@ public class Level
             level++;
         }
     }
+
+    public float GetExperiencePercentage()
+    {
+        int nextLevelExperience = GetExperienceForNextLevel();
+        return (float)experience / nextLevelExperience;
+    }
 }
