@@ -20,6 +20,7 @@ public class GamePiece : MonoBehaviour
     public int Y { get; private set; }
     public RectTransform RectTransform { get; private set; }
     public bool IsMoving { get; private set; } = false;
+    public static event Action<MatchValueEnum, int> OnScorePoints;
 
     private void Awake()
     {
@@ -76,8 +77,10 @@ public class GamePiece : MonoBehaviour
 
     public void ScorePoints(int multiplier = 1, int bonus = 0)
     {
+        int points = (scorePoints * multiplier) + bonus;
+        OnScorePoints?.Invoke(MatchValue, points);
         if (ScoreManager.Instance == null) return;
 
-        ScoreManager.Instance.AddScore((scorePoints * multiplier) + bonus);
+        ScoreManager.Instance.AddScore(points);
     }
 }

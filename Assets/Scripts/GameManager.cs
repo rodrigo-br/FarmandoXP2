@@ -84,11 +84,11 @@ public class GameManager : SingletonBase<GameManager>
         {
             timeLeft -= Time.deltaTime;
             ScoreManager.Instance.UpdateTimer(timeLeft);
-            if (timeLeft <= 0)
-            {
-                isGameOver = true;
-                isWinner = false;
-            }
+            //if (timeLeft <= 0)
+            //{
+            //    isGameOver = true;
+            //    isWinner = false;
+            //}
             yield return null;
         }
         ScreenFader.Instance.FadeOn();
