@@ -9,7 +9,8 @@ public enum MatchValueEnum
     Blue,
     Red,
     Purlple,
-    Gray
+    Gray,
+    None
 }
 
 public class GamePiece : MonoBehaviour

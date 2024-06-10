@@ -4,6 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(BoardDeadlock))]
 public class Board : MonoBehaviour
 {
     [System.Serializable]
@@ -37,9 +38,11 @@ public class Board : MonoBehaviour
     private bool playerInputBusy = false;
     private ParticleManager particleManager;
     private int scoreMultiplier = 0;
+    private BoardDeadlock boardDeadlock;
 
     private void Awake()
     {
+        boardDeadlock = GetComponent<BoardDeadlock>();
         particleManager = GameObject.FindWithTag("ParticleManager").GetComponent<ParticleManager>();
         tiles = new Tile[width, height];
         gamePieces = new GamePiece[width, height];
@@ -56,6 +59,16 @@ public class Board : MonoBehaviour
         SetupTiles();
         SetupGamePieces();
         FillBoard(-5);
+        if (boardDeadlock.IsDeadlocked(gamePieces, 3))
+        {
+            Debug.Log("Deu deadlock");
+            ClearBoard();
+            StartCoroutine(RefilRoutine());
+        }
+        else
+        {
+            Debug.Log("Sem deadlock");
+        }
     }
 
     private void SwapGamePieces(GamePiece gp1, GamePiece gp2)
@@ -500,6 +513,11 @@ public class Board : MonoBehaviour
             for (int j = 0; j < height; j++)
             {
                 ClearPieceAt(i, j);
+
+                if (particleManager != null)
+                {
+                    particleManager.ClearBombFXAt(tiles[i, j]);
+                }
             }
         }
     }
@@ -591,6 +609,15 @@ public class Board : MonoBehaviour
         }
         while (matches.Count != 0);
         
+        if (boardDeadlock.IsDeadlocked(gamePieces, 3))
+        {
+            Debug.Log("DEAD LOCKEOU");
+            yield return new WaitForSeconds(2.5f);
+            Debug.Log("VAI EXPLODIR");
+            ClearBoard();
+            yield return new WaitForSeconds(1f);
+            yield return StartCoroutine(RefilRoutine());
+        }
 
         playerInputEnabled = true;
         playerInputBusy = false;

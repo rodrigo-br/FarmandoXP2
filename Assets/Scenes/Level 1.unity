@@ -1653,7 +1653,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -2265,6 +2265,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1424096350}
   - component: {fileID: 1424096351}
+  - component: {fileID: 1424096352}
   m_Layer: 5
   m_Name: Board
   m_TagString: Board
@@ -2304,8 +2305,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startingGamePieces: []
-  width: 7
-  height: 5
+  width: 4
+  height: 4
   tilePrefab: {fileID: 3816228596244108645, guid: 63c60e70962337b43bbcf65efbdab709, type: 3}
   gamePiecePrefabs:
   - {fileID: 4433591811794084971, guid: 7082866630945c9458a828697af38333, type: 3}
@@ -2327,6 +2328,18 @@ MonoBehaviour:
   - {fileID: 8096555744055355943, guid: 38db9076385729f458f19b75b15cade3, type: 3}
   coloredBombPrefab: {fileID: 574883153491721165, guid: df974e98e9ca7e44bb9d40daacdd6de4, type: 3}
   moveTime: 0.4
+--- !u!114 &1424096352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1424096349}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fb95b12070f7304f878b2ffe8f3cae4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1434027432
 PrefabInstance:
   m_ObjectHideFlags: 0
