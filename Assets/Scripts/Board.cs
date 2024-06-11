@@ -132,7 +132,8 @@ public class Board : MonoBehaviour
         {
             clickedTileBomb = DropBomb(gp1X, gp1Y, gp1Matches);
             targetTileBomb = DropBomb(gp2X, gp2Y, gp2Matches);
-            ClearAndRefillBoard(gp1Matches.Union(gp2Matches).ToList().Union(colorMatches).ToList());
+            ClearAndRefillBoard(gp1Matches.Union(gp2Matches).ToList());
+            ClearAndRefillBoard(colorMatches, isAllBombed: true);
             yield break;
         }
         StartCoroutine(SwapGamePiecesCoroutine(gp1, gp2, false));
@@ -479,7 +480,7 @@ public class Board : MonoBehaviour
         //HighlightTileOff(x, y);
     }
 
-    private void ClearPieceAt(List<GamePiece> gamePieces, List<GamePiece> bombedPieces)
+    private void ClearPieceAt(List<GamePiece> gamePieces, List<GamePiece> bombedPieces, bool isAllBombed = false)
     {
         foreach (GamePiece piece in gamePieces)
         {
@@ -494,7 +495,7 @@ public class Board : MonoBehaviour
                 }
                 piece.ScorePoints(scoreMultiplier, bonus);
                 if (particleManager == null) continue;
-                if (bombedPieces.Contains(piece))
+                if (bombedPieces.Contains(piece) || isAllBombed)
                 {
                     particleManager.ClearBombFXAt(tiles[piece.X, piece.Y]);
                 }
@@ -585,12 +586,12 @@ public class Board : MonoBehaviour
         return columns;
     }
 
-    private void ClearAndRefillBoard(List<GamePiece> pieces)
+    private void ClearAndRefillBoard(List<GamePiece> pieces, bool isAllBombed = false)
     {
-        StartCoroutine(ClearAndRefillBoardRoutine(pieces));
+        StartCoroutine(ClearAndRefillBoardRoutine(pieces, isAllBombed));
     }
 
-    private IEnumerator ClearAndRefillBoardRoutine(List<GamePiece> pieces)
+    private IEnumerator ClearAndRefillBoardRoutine(List<GamePiece> pieces, bool isAllBombed = false)
     {
         playerInputEnabled = false;
         playerInputBusy = true;
@@ -600,7 +601,7 @@ public class Board : MonoBehaviour
         do
         {
             scoreMultiplier++;
-            yield return StartCoroutine(ClearAndCollapseRoutine(matches));
+            yield return StartCoroutine(ClearAndCollapseRoutine(matches, isAllBombed));
             yield return null;
 
             yield return StartCoroutine(RefilRoutine());
@@ -623,7 +624,7 @@ public class Board : MonoBehaviour
         playerInputBusy = false;
     }
 
-    private IEnumerator ClearAndCollapseRoutine(List<GamePiece> pieces)
+    private IEnumerator ClearAndCollapseRoutine(List<GamePiece> pieces, bool isAllBombed = false)
     {
         List<GamePiece> movingPieces = new();
         List<GamePiece> matches = new();
@@ -637,7 +638,7 @@ public class Board : MonoBehaviour
             bombedPieces = GetBombedPieces(pieces);
             pieces = pieces.Union(bombedPieces).ToList();
 
-            ClearPieceAt(pieces, bombedPieces);
+            ClearPieceAt(pieces, bombedPieces, isAllBombed);
 
             if (clickedTileBomb != null)
             {
@@ -705,6 +706,20 @@ public class Board : MonoBehaviour
             pieces.Add(gamePieces[column, i]);
         }
         return pieces;
+    }
+
+    public void ExplodeRandomColumn()
+    {
+        List<GamePiece> piecesToExplode = GetColumnPieces(Random.Range(0, width));
+
+        ClearAndRefillBoard(piecesToExplode, true);
+    }
+
+    public void ExplodeRandomRow()
+    {
+        List<GamePiece> piecesToExplode = GetRowPieces(Random.Range(0, height));
+
+        ClearAndRefillBoard(piecesToExplode, true);
     }
 
     private List<GamePiece> GetAdjacentPieces(int x, int y, int offset = 1)

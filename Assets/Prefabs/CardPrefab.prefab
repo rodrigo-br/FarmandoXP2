@@ -408,5 +408,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   staminaBar: {fileID: 8430297812044797249}
   specialBar: {fileID: 777353902495967135}
+  runnerImage: {fileID: 2802293341533783912}
   color: 2
   specialFillRequired: 100

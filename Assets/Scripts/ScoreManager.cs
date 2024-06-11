@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System;
 using System.Collections;
 using TMPro;
@@ -24,7 +25,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
     private void Start()
     {
         UpdateScoreText(level.GetCurrentExperience());
-        levelText.text = $"Level {level.GetLevel() + 1}";
+        levelText.text = $"{level.GetLevel() + 1}";
     }
 
     public void UpdateTimer(float value)
@@ -34,14 +35,14 @@ public class ScoreManager : SingletonBase<ScoreManager>
 
     public void UpdateScoreText(int scoreValue)
     {
-        scoreText.text = scoreValue.ToString();
+        scoreText.text = $"{scoreValue}";
     }
 
     public void AddScore(int value)
     {
         int currentLevel = level.GetLevel();
         level.AddExperience(value);
-        levelProgressBar.fillAmount = level.GetExperiencePercentage();
+        StartCoroutine(CountsProgressRoutine());
         currentScore += value;
         if (currentLevel < level.GetLevel())
         {
@@ -54,8 +55,8 @@ public class ScoreManager : SingletonBase<ScoreManager>
     {
         gameObject.SetActive(true);
         levelProgressBar = GameObject.FindWithTag("LevelProgressBar").GetComponent<Image>();
-        levelProgressBar.fillAmount = level.GetExperiencePercentage();
-        levelText.text = $"Level {level.GetLevel() + 1}";
+        StartCoroutine(CountsProgressRoutine());
+        levelText.text = $"{level.GetLevel() + 1}";
     }
 
     private IEnumerator CountsScoreRoutine()
@@ -69,6 +70,34 @@ public class ScoreManager : SingletonBase<ScoreManager>
             iterations++;
             yield return null;
         }
+    }
+
+    private IEnumerator CountsProgressRoutine()
+    {
+        int iterations = 0;
+
+        while (levelProgressBar.fillAmount < level.GetExperiencePercentage() && iterations < 1000)
+        {
+            levelProgressBar.fillAmount += 0.0002f;
+            iterations++;
+            yield return null;
+        }
+    }
+
+    public void PunchTimer()
+    {
+        timer.transform.DOPunchScale(Vector3.one * 2, 1f, 1, 0);
+    }
+
+    public void PunchScore()
+    {
+        scoreText.transform.DOPunchScale(Vector3.one * 2, 10f, 5, 0);
+        scoreText.color = Color.red;
+    }
+
+    public void CleanScoreColor()
+    {
+        scoreText.color = Color.white;
     }
 
 }

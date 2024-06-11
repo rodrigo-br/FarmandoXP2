@@ -129,10 +129,17 @@ public class GameManager : SingletonBase<GameManager>
         ScreenFader.Instance.FadeOn();
         yield return new WaitForSeconds(1f);
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;
+        ScoreManager.Instance.CleanScoreColor();
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
             nextSceneIndex -= 2;
         }
         SceneManager.LoadScene(nextSceneIndex);
+    }
+
+    public void IncreaseTimer()
+    {
+        timeLeft += 10;
+        ScoreManager.Instance.PunchTimer();
     }
 }

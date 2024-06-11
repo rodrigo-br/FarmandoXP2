@@ -210,7 +210,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5194398926991772404, guid: f5370b657378eb744a7df6e189c35e92, type: 3}
       propertyPath: <MatchValue>k__BackingField
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 5789056313028656683, guid: f5370b657378eb744a7df6e189c35e92, type: 3}
       propertyPath: m_Pivot.x
