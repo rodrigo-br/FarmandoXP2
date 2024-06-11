@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 383428038977268521}
   - component: {fileID: 1074001119239852268}
+  - component: {fileID: -8142994741116117723}
   m_Layer: 0
   m_Name: Bomb Ad
   m_TagString: Untagged
@@ -128,3 +129,15 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-8142994741116117723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2924904436890902300}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54cb783857575f4988671231d569493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
