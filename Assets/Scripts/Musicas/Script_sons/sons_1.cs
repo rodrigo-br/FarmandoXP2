@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 public class sons_1 : SingletonBase<sons_1>
 {
-    [SerializeField] AudioClip enemyShootClip;
+    
     [SerializeField] AudioClip playerShootClip;
     [SerializeField] AudioClip[] enemySounds;
     [SerializeField] AudioClip[] enemyDieClips;
@@ -16,15 +16,11 @@ public class sons_1 : SingletonBase<sons_1>
     AudioSource myAudioSource;
 
 
-    private void Awake()
+    public override void Awake()
     {
+        base.Awake();
         myAudioSource = GetComponent<AudioSource>();
         sfxVolume = 1;
-    }
-
-    private void Start()
-    {
-        myAudioSource.Play();
     }
 
     public void ChangeMusicVolume(float amount)
@@ -61,12 +57,6 @@ public class sons_1 : SingletonBase<sons_1>
     {
         PlayClip(playerShootClip);
     }
-
-    public void PlayEnemyShootClip()
-    {
-        PlayClip(enemyShootClip);
-    }
-
     public void PlayCorrectComboClip()
     {
         PlayClip(correctCombo);
