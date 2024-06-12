@@ -2258,14 +2258,49 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 867d5e92680ab0641a7dee46456b0f09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <score>k__BackingField: {fileID: 643108592}
-  <stars>k__BackingField:
+  <Score>k__BackingField: {fileID: 643108592}
+  <Stars>k__BackingField:
   - {fileID: 1118982949}
   - {fileID: 48858912}
   - {fileID: 428904670}
   - {fileID: 1546205167}
   - {fileID: 2124852536}
-  <message>k__BackingField: {fileID: 6486854695494386155}
+  <Message>k__BackingField: {fileID: 6486854695494386155}
+  <FiveStarMessages>k__BackingField:
+  - {fileID: 11400000, guid: c13bba3b0033bb646adddaa2fb20efb7, type: 2}
+  - {fileID: 11400000, guid: 8bcb1e9b8a5860741a4e7c3d2888e14e, type: 2}
+  - {fileID: 11400000, guid: 1180247a014c44a43bb2f0cfb7e287ce, type: 2}
+  - {fileID: 11400000, guid: 815649df97bbff244aeb13a8642314ab, type: 2}
+  <FourStarMessages>k__BackingField:
+  - {fileID: 11400000, guid: e161322afa68ad044bdcc2abaff0ebd4, type: 2}
+  - {fileID: 11400000, guid: c8087f5bdf11a2646bf6e29e844e353b, type: 2}
+  - {fileID: 11400000, guid: 2aa1392e13652604d9213398bd166ccd, type: 2}
+  - {fileID: 11400000, guid: 987881ae6965b1e4a8d7a57eddb792d0, type: 2}
+  - {fileID: 11400000, guid: 9eee296d5c22bd9418c074bf5cb0804a, type: 2}
+  <ThreeStarMessages>k__BackingField:
+  - {fileID: 11400000, guid: 71ff5763f33a11f428fc27d873bbe3b9, type: 2}
+  - {fileID: 11400000, guid: e19b60b4e3fa2a64b961bf4c25d0e9b6, type: 2}
+  - {fileID: 11400000, guid: c73dc6fbb1913974bbc6ba76420f4403, type: 2}
+  - {fileID: 11400000, guid: 97ba032c7571dd046937f7f877f320dc, type: 2}
+  - {fileID: 11400000, guid: 2c25502ba8b72f640b60468f5b45f3a3, type: 2}
+  <TwoStarMessages>k__BackingField:
+  - {fileID: 11400000, guid: 10fea427bc008aa48915ce2d85c065eb, type: 2}
+  - {fileID: 11400000, guid: fb7572220dbc53b449ea940ee6419913, type: 2}
+  - {fileID: 11400000, guid: fe3c2a0ff84ae9143a3f46ba22a94625, type: 2}
+  - {fileID: 11400000, guid: f4e03d5a9482dca408076ae5f9b7a78b, type: 2}
+  - {fileID: 11400000, guid: b7b8418d470174e48b4a0bf59eaa11c1, type: 2}
+  <OneStarMessages>k__BackingField:
+  - {fileID: 11400000, guid: 6372460fb4e6ba543a018bdc16b22b35, type: 2}
+  - {fileID: 11400000, guid: 8438f61bc6109ce48844548f36d7f052, type: 2}
+  - {fileID: 11400000, guid: f31798c18469a8d4589efc6acfd529a2, type: 2}
+  - {fileID: 11400000, guid: 4a226addc31dd2d4b9f8558845423eb8, type: 2}
+  - {fileID: 11400000, guid: 397c3d4d8c81d1542858a6c29424939e, type: 2}
+  <ZeroStarMessages>k__BackingField:
+  - {fileID: 11400000, guid: efabbc5f06736834d827e45992319501, type: 2}
+  - {fileID: 11400000, guid: d70de1c716c37a34284b4e244dfaead7, type: 2}
+  - {fileID: 11400000, guid: 64d219fe520350049aedeee10c1289ac, type: 2}
+  - {fileID: 11400000, guid: 47088e600ebcb8943ab6d7112514d605, type: 2}
+  - {fileID: 11400000, guid: bc3b15619102579459fd311c45f638e8, type: 2}
 --- !u!4 &2067064882
 Transform:
   m_ObjectHideFlags: 0

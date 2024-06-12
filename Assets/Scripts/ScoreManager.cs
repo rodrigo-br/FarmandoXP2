@@ -1,5 +1,4 @@
 using DG.Tweening;
-using System;
 using System.Collections;
 using TMPro;
 using UnityEngine;
@@ -102,13 +101,53 @@ public class ScoreManager : SingletonBase<ScoreManager>
         scoreText.color = Color.white;
     }
 
-    public string UpdateWinnerScreen()
+    public void UpdateWinnerScreen(References references)
     {
         int oldLevelScore = nextLevelScore;
         nextLevelScore = level.GetTotalExperienceForLevel();
-        return $"{currentScore} / {oldLevelScore}";
+        references.Score.text = $"{currentScore} / {oldLevelScore}";
+
+        float progressPercentage = (float)currentScore / oldLevelScore * 100;
+        int starsToActivate = (int)(progressPercentage / 20);
+        for (int i = 0; i < references.Stars.Length; i++)
+        {
+            if (i < starsToActivate)
+            {
+                references.Stars[i].enabled = true;
+            }
+            else
+            {
+                references.Stars[i].enabled = false;
+            }
+        }
+
+        Messages message = null;
+        switch (starsToActivate)
+        {
+            case 0:
+                message = references.ZeroStarMessages[Random.Range(0, references.ZeroStarMessages.Length)];
+                break;
+            case 1:
+                message = references.OneStarMessages[Random.Range(0, references.OneStarMessages.Length)];
+                break;
+            case 2:
+                message = references.TwoStarMessages[Random.Range(0, references.TwoStarMessages.Length)];
+                break;
+            case 3:
+                message = references.ThreeStarMessages[Random.Range(0, references.ThreeStarMessages.Length)];
+                break;
+            case 4:
+                message = references.FourStarMessages[Random.Range(0, references.FourStarMessages.Length)];
+                break;
+            case 5:
+                message = references.FiveStarMessages[Random.Range(0, references.FiveStarMessages.Length)];
+                break;
+
+        }
+        if (message != null)
+        {
+            references.Message.text = message.message;
+            //AudioSource.PlayClipAtPoint(message.voice, Camera.main.transform.position);
+        }
     }
-
-
-
 }

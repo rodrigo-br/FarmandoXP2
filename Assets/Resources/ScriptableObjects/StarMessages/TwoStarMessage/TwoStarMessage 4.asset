@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a978684f0d68264496c6438413e1707, type: 3}
+  m_Name: TwoStarMessage 4
+  m_EditorClassIdentifier: 
+  message: "Voc\xEA j\xE1 avan\xE7ou bastante! Continue se esfor\xE7ando e ver\xE1
+    os resultados."
+  voice: {fileID: 8300000, guid: f270921ac6af1c842aa2d5722a5d486f, type: 3}

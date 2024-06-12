@@ -27,6 +27,7 @@ public class IntroScene : MonoBehaviour
         if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
         {
             isChangingPage = true;
+            AudioManager.Instance.PlayMouseClick();
             StartCoroutine(NextPageCoroutine());
         }
     }

@@ -91,6 +91,11 @@ public class Board : MonoBehaviour
         RectTransform rectTransform1 = gp1.RectTransform;
         RectTransform rectTransform2 = gp2.RectTransform;
 
+        if (tiles[gp2X, gp2Y] == null || tiles[gp1X, gp1Y] == null)
+        {
+            ReleaseTile();
+            yield break;
+        }
         rectTransform1.SetParent(tiles[gp2X, gp2Y].RectTransform);
         rectTransform2.SetParent(tiles[gp1X, gp1Y].RectTransform);
 
@@ -133,6 +138,11 @@ public class Board : MonoBehaviour
             clickedTileBomb = DropBomb(gp1X, gp1Y, gp1Matches);
             targetTileBomb = DropBomb(gp2X, gp2Y, gp2Matches);
             ClearAndRefillBoard(gp1Matches.Union(gp2Matches).ToList());
+            if (colorMatches.Count > 0)
+            {
+                AudioManager.Instance.PlayBombAdjacent();
+                AudioManager.Instance.PlayBombThunder();
+            }
             ClearAndRefillBoard(colorMatches, isAllBombed: true);
             yield break;
         }
@@ -482,6 +492,10 @@ public class Board : MonoBehaviour
 
     private void ClearPieceAt(List<GamePiece> gamePieces, List<GamePiece> bombedPieces, bool isAllBombed = false)
     {
+        if (gamePieces.Count > 0 && bombedPieces.Count == 0)
+        {
+            AudioManager.Instance.PlayHoverMouseGem();
+        }
         foreach (GamePiece piece in gamePieces)
         {
             if (piece != null)
@@ -713,6 +727,7 @@ public class Board : MonoBehaviour
         List<GamePiece> piecesToExplode = GetColumnPieces(Random.Range(0, width));
 
         ClearAndRefillBoard(piecesToExplode, true);
+        AudioManager.Instance.PlayBombThunder();
     }
 
     public void ExplodeRandomRow()
@@ -720,6 +735,7 @@ public class Board : MonoBehaviour
         List<GamePiece> piecesToExplode = GetRowPieces(Random.Range(0, height));
 
         ClearAndRefillBoard(piecesToExplode, true);
+        AudioManager.Instance.PlayBombThunder();
     }
 
     private List<GamePiece> GetAdjacentPieces(int x, int y, int offset = 1)
@@ -756,9 +772,11 @@ public class Board : MonoBehaviour
                 case BombType.Thunder:
                     piecesToClear = GetColumnPieces(bomb.X);
                     piecesToClear = piecesToClear.Union(GetRowPieces(bomb.Y)).ToList();
+                    AudioManager.Instance.PlayBombThunder();
                     break;
                 case BombType.Bomb:
                     piecesToClear = GetAdjacentPieces(bomb.X, bomb.Y, 1);
+                    AudioManager.Instance.PlayBombAdjacent();
                     break;
                 case BombType.Color:
                     break;

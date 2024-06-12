@@ -13,6 +13,7 @@ public class GameManager : SingletonBase<GameManager>
     private bool isGameOver = false;
     private bool isWinner = false;
     private Board board;
+    private bool isTimerOn;
 
     public override void Awake()
     {
@@ -57,8 +58,7 @@ public class GameManager : SingletonBase<GameManager>
         References references = GameObject.FindWithTag("References")?.GetComponent<References>();
         if (references != null)
         {
-            string score = ScoreManager.Instance.UpdateWinnerScreen();
-            references.score.text = score;
+            ScoreManager.Instance.UpdateWinnerScreen(references);
         }
         while (!isReadyToBegin)
         {
@@ -78,8 +78,10 @@ public class GameManager : SingletonBase<GameManager>
         if (board != null)
         {
             timeLeft = 60;
+            isTimerOn = true;
             board.SetupBoard();
             ScoreManager.Instance.UpdateLevelText();
+            AudioManager.Instance.PlayCheerLow();
         }
     }
 
@@ -88,13 +90,12 @@ public class GameManager : SingletonBase<GameManager>
         Debug.Log("PlayGameRoutine");
         while (!isGameOver)
         {
-            timeLeft -= Time.deltaTime;
+            timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, float.MaxValue);
             ScoreManager.Instance.UpdateTimer(timeLeft);
-            //if (timeLeft <= 0)
-            //{
-            //    isGameOver = true;
-            //    isWinner = false;
-            //}
+            if (timeLeft == 0)
+            {
+                SetWinner();
+            }
             yield return null;
         }
         ScreenFader.Instance.FadeOn();
@@ -107,6 +108,7 @@ public class GameManager : SingletonBase<GameManager>
         if (isWinner)
         {
             NextScene();
+            AudioManager.Instance.PlayVictoryScreenMusic();
         }
         else
         {
@@ -131,6 +133,8 @@ public class GameManager : SingletonBase<GameManager>
     {
         isWinner = false;
         isGameOver = false;
+        isTimerOn = false;
+        timeLeft = 60;
         Debug.Log("LoadNextSceneRoutine");
         ScreenFader.Instance.FadeOn();
         yield return new WaitForSeconds(1f);
