@@ -50,4 +50,14 @@ public class Level
         int nextLevelExperience = GetExperienceForNextLevel();
         return (float)experience / nextLevelExperience;
     }
+
+    public int GetTotalExperienceForLevel()
+    {
+        int totalExperience = 0;
+        for (int i = 1; i < level + 2; i++)
+        {
+            totalExperience += CalculateExperience(i, baseExperience, experienceFactor);
+        }
+        return totalExperience;
+    }
 }

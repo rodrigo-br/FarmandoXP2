@@ -15,6 +15,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
     [SerializeField] private TextMeshProUGUI timer;
     private Image levelProgressBar;
     private Level level;
+    private int nextLevelScore;
 
     public override void Awake()
     {
@@ -26,6 +27,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
     {
         UpdateScoreText(level.GetCurrentExperience());
         levelText.text = $"{level.GetLevel() + 1}";
+        nextLevelScore = level.GetExperienceForNextLevel();
     }
 
     public void UpdateTimer(float value)
@@ -99,5 +101,14 @@ public class ScoreManager : SingletonBase<ScoreManager>
     {
         scoreText.color = Color.white;
     }
+
+    public string UpdateWinnerScreen()
+    {
+        int oldLevelScore = nextLevelScore;
+        nextLevelScore = level.GetTotalExperienceForLevel();
+        return $"{currentScore} / {oldLevelScore}";
+    }
+
+
 
 }

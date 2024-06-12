@@ -8,6 +8,7 @@ TagManager:
   - ScoreManagerCanvas
   - Board
   - LevelProgressBar
+  - References
   layers:
   - Default
   - TransparentFX

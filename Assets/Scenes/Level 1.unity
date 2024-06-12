@@ -2130,7 +2130,7 @@ MonoBehaviour:
   - {fileID: 8096555744055355943, guid: dd64ebfb18e7e414297b2083163110be, type: 3}
   - {fileID: 8096555744055355943, guid: 38db9076385729f458f19b75b15cade3, type: 3}
   coloredBombPrefab: {fileID: 574883153491721165, guid: df974e98e9ca7e44bb9d40daacdd6de4, type: 3}
-  moveTime: 0.4
+  moveTime: 0.2
 --- !u!114 &1424096352
 MonoBehaviour:
   m_ObjectHideFlags: 0

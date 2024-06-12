@@ -33,9 +33,16 @@ public class BoardDeadlock : MonoBehaviour
 
     private List<GamePiece> GetMinimumMatches(List<GamePiece> gamePieces, int minForMatch = 2)
     {
+        if (gamePieces == null)
+        {
+            return new List<GamePiece>();
+        }
+
         List<GamePiece> matches = new();
 
-        var groups = gamePieces.GroupBy(n => n.MatchValue);
+        var nonNullGamePieces = gamePieces.Where(n => n != null);
+
+        var groups = nonNullGamePieces.GroupBy(n => n.MatchValue);
 
         foreach (var group in groups)
         {

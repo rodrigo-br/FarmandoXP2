@@ -54,6 +54,12 @@ public class GameManager : SingletonBase<GameManager>
     {
         Debug.Log("StartGameRoutine");
         ScoreManager.Instance.gameObject.SetActive(false);
+        References references = GameObject.FindWithTag("References")?.GetComponent<References>();
+        if (references != null)
+        {
+            string score = ScoreManager.Instance.UpdateWinnerScreen();
+            references.score.text = score;
+        }
         while (!isReadyToBegin)
         {
             yield return null;

@@ -23,7 +23,7 @@ public class Board : MonoBehaviour
     [SerializeField] private GameObject[] adjacentBombPrefabs;
     [SerializeField] private GameObject[] thunderBombPrefabs;
     [SerializeField] private GameObject coloredBombPrefab;
-    [SerializeField] private float moveTime = 0.4f;
+    [SerializeField] private float moveTime = 0.2f;
     private RectTransform boardRectTransform;
     private float xOffset;
     private float yOffset;
@@ -859,6 +859,7 @@ public class Board : MonoBehaviour
 
     private bool IsColorBomb(GamePiece gamePiece)
     {
+        if (gamePiece == null) return false;
         Bomb bomb = gamePiece.GetComponent<Bomb>();
 
         if (bomb != null)
