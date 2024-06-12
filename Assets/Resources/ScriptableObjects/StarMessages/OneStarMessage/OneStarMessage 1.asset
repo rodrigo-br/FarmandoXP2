@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: OneStarMessage 1
   m_EditorClassIdentifier: 
   message: "Voc\xEA conseguiu terminar! Continue praticando para melhorar"
-  voice: {fileID: 8300000, guid: f718c9c1b75cf164693bc48360bf1648, type: 3}
+  voice: {fileID: 8300000, guid: 8ad8409bcea02cb42b26e8fbca65b38b, type: 3}

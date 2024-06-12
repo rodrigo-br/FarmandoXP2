@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TwoStarMessage 3
   m_EditorClassIdentifier: 
   message: "\xD3timo! Voc\xEA est\xE1 melhorando. N\xE3o pare agora!"
-  voice: {fileID: 8300000, guid: 422ad25e44db50f489bf03872ee29209, type: 3}
+  voice: {fileID: 8300000, guid: e180dfda11937ee40bb545d6a0721c32, type: 3}

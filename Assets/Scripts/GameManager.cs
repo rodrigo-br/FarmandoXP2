@@ -81,7 +81,6 @@ public class GameManager : SingletonBase<GameManager>
             isTimerOn = true;
             board.SetupBoard();
             ScoreManager.Instance.UpdateLevelText();
-            AudioManager.Instance.PlayCheerLow();
         }
     }
 
@@ -143,6 +142,7 @@ public class GameManager : SingletonBase<GameManager>
         if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
         {
             nextSceneIndex -= 2;
+            AudioManager.Instance.PlayMainMusic();
         }
         SceneManager.LoadScene(nextSceneIndex);
     }

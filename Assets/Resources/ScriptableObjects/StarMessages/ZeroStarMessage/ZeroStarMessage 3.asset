@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ZeroStarMessage 3
   m_EditorClassIdentifier: 
   message: "Se estiver com d\xFAvida, n\xE3o deixe de ler nossa p\xE1gina!"
-  voice: {fileID: 8300000, guid: 04611432656113449b1da42a33e28e08, type: 3}
+  voice: {fileID: 8300000, guid: ec1ced90f52430f45bb937d435637f5b, type: 3}

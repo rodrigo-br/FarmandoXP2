@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FiveStarMessage 1
   m_EditorClassIdentifier: 
   message: "Parab\xE9ns, Voc\xEA foi excelente!\nBoa sorte na pr\xF3xima!"
-  voice: {fileID: 8300000, guid: ecbb3189ba71b734b873e12d431e9bfb, type: 3}
+  voice: {fileID: 8300000, guid: ebac88439cc137743a40b529502e0938, type: 3}

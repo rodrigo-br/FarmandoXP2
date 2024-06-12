@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FiveStarMessage 2
   m_EditorClassIdentifier: 
   message: "Nossa que incr\xEDvel!\nSer\xE1 que voc\xEA consegue fazer de novo?"
-  voice: {fileID: 8300000, guid: 67d3ac0ded7b32149ac81adf877d5b86, type: 3}
+  voice: {fileID: 8300000, guid: 3654c7fb901f2994d894867b02cc20b1, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TreeStarMessage 3
   m_EditorClassIdentifier: 
   message: "Excelente trabalho! Continue assim e voc\xEA chegar\xE1 ao topo"
-  voice: {fileID: 8300000, guid: 010f42169518a5340908c182bf184971, type: 3}
+  voice: {fileID: 8300000, guid: a610d2c7d73c82a4695f303572cd67de, type: 3}

@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: "Foi um come\xE7o dif\xEDcil, mas n\xE3o desista! A pr\xE1tica leva \xE0
     perfei\xE7\xE3o"
-  voice: {fileID: 8300000, guid: 5b1eb499824811f4182553072c674ee0, type: 3}
+  voice: {fileID: 8300000, guid: 7cb12117cb8a02e43be23850efb11d4b, type: 3}

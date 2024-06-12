@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: OneStarMessage
   m_EditorClassIdentifier: 
   message: "N\xE3o desanime, cada passo \xE9 um progresso! Boa sorte na pr\xF3xima!"
-  voice: {fileID: 8300000, guid: 21b378a61912fd046a3d42466fa10641, type: 3}
+  voice: {fileID: 8300000, guid: f683eaa5cbf60a24884c21649a69d222, type: 3}

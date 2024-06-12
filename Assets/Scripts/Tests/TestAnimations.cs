@@ -68,7 +68,7 @@ public class TestAnimations : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         if (disable) { return; }
         if (image == null || image.transform == null) { return; }
         scaleTweenUp = image.transform.DOScale(endValue, DOScaleDuration);
-        //AudioManager.Instance.PlayHoverMouseGem();
+        AudioManager.Instance.PlayHoverMouseGem();
 
         // Certifique-se de que o GameObject tem um componente Image
         //image = GetComponent<Image>();

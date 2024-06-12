@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FourStarMessage 4
   m_EditorClassIdentifier: 
   message: "Quase perfeito! Apenas mais um passo para a excel\xEAncia total!"
-  voice: {fileID: 8300000, guid: d6c74a5a87417b646841249e1ea7d075, type: 3}
+  voice: {fileID: 8300000, guid: 7ccfc262be4d85f4b88f63f36aba862d, type: 3}

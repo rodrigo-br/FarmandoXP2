@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TreeStarMessage
   m_EditorClassIdentifier: 
   message: "Muito bem! Tr\xEAs estrelas \xE9 uma \xF3tima conquista!"
-  voice: {fileID: 8300000, guid: f47e2ad9ce6d1954fb6ba8ae28fa4cbc, type: 3}
+  voice: {fileID: 8300000, guid: 7d764e6fc72eac34484ff841259d563f, type: 3}

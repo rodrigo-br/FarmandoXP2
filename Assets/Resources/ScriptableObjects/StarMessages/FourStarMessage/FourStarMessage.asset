@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FourStarMessage
   m_EditorClassIdentifier: 
   message: "Fant\xE1stico! Quatro estrelas \xE9 uma grande conquista!"
-  voice: {fileID: 8300000, guid: 564b9a0c3826b37469bc9a6e9c3be211, type: 3}
+  voice: {fileID: 8300000, guid: 93a7613acdc264a40a5f2b9e58a465f7, type: 3}

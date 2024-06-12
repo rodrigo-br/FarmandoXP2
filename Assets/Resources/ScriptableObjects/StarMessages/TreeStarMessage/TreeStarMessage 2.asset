@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TreeStarMessage 2
   m_EditorClassIdentifier: 
   message: "Parab\xE9ns! Tr\xEAs estrelas mostram que voc\xEA tem potencial"
-  voice: {fileID: 8300000, guid: 494155cb28695fa4d851d86bc38047f1, type: 3}
+  voice: {fileID: 8300000, guid: a610d2c7d73c82a4695f303572cd67de, type: 3}

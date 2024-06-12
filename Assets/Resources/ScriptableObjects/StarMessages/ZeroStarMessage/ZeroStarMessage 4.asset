@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ZeroStarMessage 4
   m_EditorClassIdentifier: 
   message: F
-  voice: {fileID: 8300000, guid: 4681c9fc316cec14088b85751d599db2, type: 3}
+  voice: {fileID: 8300000, guid: 2ed170e3aa5dea04895018dcf8a4e5f8, type: 3}

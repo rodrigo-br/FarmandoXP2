@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: "Voc\xEA est\xE1 indo muito bem!\nS\xF3 mais um pouco e voc\xEA alcan\xE7a
     a perfei\xE7\xE3o"
-  voice: {fileID: 8300000, guid: 3f57e84211ce77247b184acf1ae9f1d3, type: 3}
+  voice: {fileID: 8300000, guid: 417519a590c1f834f9b5ce7759bbb6c0, type: 3}

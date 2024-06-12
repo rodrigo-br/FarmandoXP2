@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FourStarMessage 2
   m_EditorClassIdentifier: 
   message: "Impressionante! Continue assim e voc\xEA logo alcan\xE7ar\xE1 cinco estrelas"
-  voice: {fileID: 8300000, guid: bdecbc80a44971d41a9abd7fa352ee97, type: 3}
+  voice: {fileID: 8300000, guid: e9370143975094345a8d9ca050a2a03c, type: 3}

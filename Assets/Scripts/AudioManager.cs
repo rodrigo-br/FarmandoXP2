@@ -11,6 +11,8 @@ public class AudioManager : SingletonBase<AudioManager>
     [SerializeField] private AudioClip mouseClick; // ???
     [SerializeField] private AudioClip hoverMouseGem;
     [SerializeField] private AudioClip victoryScreen;
+    [SerializeField] private AudioClip bombSimple;
+    [SerializeField] private AudioClip mainMusic;
     private float sfxVolume = 1.0f;
 
     public override void Awake()
@@ -56,8 +58,18 @@ public class AudioManager : SingletonBase<AudioManager>
         PlaySFX(hoverMouseGem);
     }
 
+    public void PlayBombSimple()
+    {
+        PlaySFX(bombSimple);
+    }
+
     public void PlayVictoryScreenMusic()
     {
         PlayMusic(victoryScreen);
+    }
+
+    public void PlayMainMusic()
+    {
+        PlayMusic(mainMusic);
     }
 }

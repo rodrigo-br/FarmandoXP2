@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: "Voc\xEA est\xE1 quase l\xE1!\nQuatro estrelas mostram que voc\xEA est\xE1
     perto da perfei\xE7\xE3o"
-  voice: {fileID: 8300000, guid: 164fc7bdb8bb57b4c9e4bae97d6e6878, type: 3}
+  voice: {fileID: 8300000, guid: 913a47e465d870a448251582648211f8, type: 3}

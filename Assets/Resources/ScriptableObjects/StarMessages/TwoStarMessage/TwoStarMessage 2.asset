@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   message: "Voc\xEA fez um \xF3timo progresso! Com um pouco mais de esfor\xE7o, voc\xEA
     conseguir\xE1 ainda mais."
-  voice: {fileID: 8300000, guid: a795dd0b2fe570046a541f1df211bc55, type: 3}
+  voice: {fileID: 8300000, guid: cca5d317c1d5dce48aeb371247f1f6c4, type: 3}

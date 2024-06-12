@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ZeroStarMessage 1
   m_EditorClassIdentifier: 
   message: "Se voc\xEA tentar, poder\xE1 se sair melhor na pr\xF3xima!"
-  voice: {fileID: 8300000, guid: 92cfe5652dab094429a5e0328ec583db, type: 3}
+  voice: {fileID: 8300000, guid: f9434c63b4cfe52438c1f2fe68cbcdfd, type: 3}

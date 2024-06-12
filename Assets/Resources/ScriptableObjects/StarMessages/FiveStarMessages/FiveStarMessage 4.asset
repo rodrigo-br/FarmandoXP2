@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FiveStarMessage 4
   m_EditorClassIdentifier: 
   message: "Parab\xE9ns!\nVoc\xEA \xE9 uma corredora profissional!"
-  voice: {fileID: 8300000, guid: 8b80ea8f5f8eae549ac0d627a83d3fcf, type: 3}
+  voice: {fileID: 8300000, guid: f483150e8324a824c8efce8134e03cb9, type: 3}

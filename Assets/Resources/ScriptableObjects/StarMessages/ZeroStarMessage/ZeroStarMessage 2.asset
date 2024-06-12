@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: ZeroStarMessage 2
   m_EditorClassIdentifier: 
   message: "N\xE3o desanime, vamos nos esfor\xE7ar mais na pr\xF3xima corrida!"
-  voice: {fileID: 8300000, guid: 5b1a110779f474147a2e087917c8c916, type: 3}
+  voice: {fileID: 8300000, guid: 9c9d454ce9d1f414da083ada6e33ca42, type: 3}

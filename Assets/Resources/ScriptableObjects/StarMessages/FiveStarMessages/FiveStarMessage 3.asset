@@ -15,4 +15,4 @@ MonoBehaviour:
   message: 'Perfeito! Cinco estrelas!!!
 
     Continue assim para fazer mais pontos!'
-  voice: {fileID: 8300000, guid: 623ef02cf9fdeb141a5ed408cca83001, type: 3}
+  voice: {fileID: 8300000, guid: bc99613fe809b7a4a86181f8f8710fe3, type: 3}

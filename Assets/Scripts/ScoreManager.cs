@@ -147,7 +147,12 @@ public class ScoreManager : SingletonBase<ScoreManager>
         if (message != null)
         {
             references.Message.text = message.message;
-            //AudioSource.PlayClipAtPoint(message.voice, Camera.main.transform.position);
+            AudioSource.PlayClipAtPoint(message.voice, Camera.main.transform.position);
         }
+    }
+
+    public int GetLevel()
+    {
+        return level.GetLevel() + 1;
     }
 }

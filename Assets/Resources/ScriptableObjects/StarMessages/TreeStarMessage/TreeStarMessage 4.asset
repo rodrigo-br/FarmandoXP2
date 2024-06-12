@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TreeStarMessage 4
   m_EditorClassIdentifier: 
   message: "Tr\xEAs estrelas! Voc\xEA est\xE1 quase l\xE1, continue se esfor\xE7ando!"
-  voice: {fileID: 8300000, guid: 35210fe625bbbfe4e9a361ef4aee5bfa, type: 3}
+  voice: {fileID: 8300000, guid: 417519a590c1f834f9b5ce7759bbb6c0, type: 3}

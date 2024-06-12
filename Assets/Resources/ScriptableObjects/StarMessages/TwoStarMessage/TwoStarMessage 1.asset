@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TwoStarMessage 1
   m_EditorClassIdentifier: 
   message: "Dois passos \xE0 frente! Mantenha o ritmo e logo estar\xE1 no topo."
-  voice: {fileID: 8300000, guid: caa39ebb3363cdc4580139f75ae0d544, type: 3}
+  voice: {fileID: 8300000, guid: c3cec5c867618ef48aba99f6941d40e8, type: 3}

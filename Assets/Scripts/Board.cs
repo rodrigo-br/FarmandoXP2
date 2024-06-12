@@ -91,7 +91,7 @@ public class Board : MonoBehaviour
         RectTransform rectTransform1 = gp1.RectTransform;
         RectTransform rectTransform2 = gp2.RectTransform;
 
-        if (tiles[gp2X, gp2Y] == null || tiles[gp1X, gp1Y] == null)
+        if (tiles[gp2X, gp2Y] == null || tiles[gp1X, gp1Y] == null || rectTransform1 == null || rectTransform2 == null)
         {
             ReleaseTile();
             yield break;
@@ -494,7 +494,7 @@ public class Board : MonoBehaviour
     {
         if (gamePieces.Count > 0 && bombedPieces.Count == 0)
         {
-            AudioManager.Instance.PlayHoverMouseGem();
+            AudioManager.Instance.PlayBombSimple();
         }
         foreach (GamePiece piece in gamePieces)
         {

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: OneStarMessage 4
   m_EditorClassIdentifier: 
   message: "Cada tentativa \xE9 uma oportunidade de aprendizado. Boa sorte na pr\xF3xima!"
-  voice: {fileID: 8300000, guid: 18a731c2d6173184d950405e461b9894, type: 3}
+  voice: {fileID: 8300000, guid: dfb0209df99b06a4b913c245957b9f45, type: 3}

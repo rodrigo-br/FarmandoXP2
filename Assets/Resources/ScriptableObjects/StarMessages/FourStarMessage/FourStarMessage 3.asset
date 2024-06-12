@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: FourStarMessage 3
   m_EditorClassIdentifier: 
   message: "\xD3timo trabalho! Quatro estrelas mostram sua dedica\xE7\xE3o"
-  voice: {fileID: 8300000, guid: 5833f99ab097e1541b7d266a11160700, type: 3}
+  voice: {fileID: 8300000, guid: e507141bd2df65c479a2705d0f6ced52, type: 3}

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TwoStarMessage
   m_EditorClassIdentifier: 
   message: "Bom trabalho! Voc\xEA est\xE1 no caminho certo. Continue praticando!"
-  voice: {fileID: 8300000, guid: 3835e4fef641c834793e644ffd154305, type: 3}
+  voice: {fileID: 8300000, guid: 99d7193462d1e4246bf147d104412bbc, type: 3}
