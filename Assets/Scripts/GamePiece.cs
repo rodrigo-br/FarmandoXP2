@@ -1,22 +1,27 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
+public enum MatchValueEnum
+{
+    Yellow,
+    Green,
+    Blue,
+    Red,
+    Purlple,
+    Gray,
+    None
+}
+
 public class GamePiece : MonoBehaviour
 {
-    public enum MatchValueEnum
-    {
-        Yellow,
-        Green,
-        Blue,
-        Red,
-        Purlple,
-        Gray
-    }
     [field: SerializeField] public MatchValueEnum MatchValue { get; private set; }
+    [SerializeField] private int scorePoints = 20;
     public int X { get; private set; }
     public int Y { get; private set; }
     public RectTransform RectTransform { get; private set; }
     public bool IsMoving { get; private set; } = false;
+    public static event Action<MatchValueEnum, int> OnScorePoints;
 
     private void Awake()
     {
@@ -28,6 +33,11 @@ public class GamePiece : MonoBehaviour
         this.X = x;
         this.Y = y;
         Move(0, 0, time);
+    }
+
+    public void SetMatchValue(MatchValueEnum matchValue)
+    {
+        this.MatchValue = matchValue;
     }
 
     public (int, int) GetCoord()
@@ -64,5 +74,14 @@ public class GamePiece : MonoBehaviour
             yield return null;
         }
         IsMoving = false;
+    }
+
+    public void ScorePoints(int multiplier = 1, int bonus = 0)
+    {
+        int points = (scorePoints * multiplier) + bonus;
+        OnScorePoints?.Invoke(MatchValue, points);
+        if (ScoreManager.Instance == null) return;
+
+        ScoreManager.Instance.AddScore(points);
     }
 }
