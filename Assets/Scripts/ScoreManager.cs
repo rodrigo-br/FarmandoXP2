@@ -8,7 +8,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
 {
     private int currentScore = 0;
     private int counterValue = 0;
-    private int increment = 5;
+    private int increment = 2;
     [SerializeField] private TextMeshProUGUI scoreText;
     [SerializeField] private TextMeshProUGUI levelText;
     [SerializeField] private TextMeshProUGUI timer;
@@ -147,7 +147,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
         if (message != null)
         {
             references.Message.text = message.message;
-            AudioSource.PlayClipAtPoint(message.voice, Camera.main.transform.position);
+            AudioManager.Instance.PlaySFX(message.voice);
         }
     }
 

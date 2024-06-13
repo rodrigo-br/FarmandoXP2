@@ -12,6 +12,7 @@ public class IntroScene : MonoBehaviour
 
     private void Awake()
     {
+        AudioManager.Instance?.StopCheerSound();
         currentPage = 0;
         pages = new();
         foreach (Transform page in this.transform)

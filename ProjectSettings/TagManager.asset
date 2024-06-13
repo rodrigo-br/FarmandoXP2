@@ -9,6 +9,7 @@ TagManager:
   - Board
   - LevelProgressBar
   - References
+  - SubMusic
   layers:
   - Default
   - TransparentFX

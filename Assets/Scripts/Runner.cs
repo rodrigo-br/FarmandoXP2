@@ -68,8 +68,6 @@ public class Runner : MonoBehaviour
         int iterations = 0;
 
         float targetFillAmount = Mathf.Clamp(currentSpecial / specialFillRequired, 0, 1);
-        Debug.Log(currentSpecial);
-        Debug.Log(targetFillAmount);
         while (specialBar.fillAmount < targetFillAmount && iterations < 1000)
         {
             specialBar.fillAmount += 0.0005f;

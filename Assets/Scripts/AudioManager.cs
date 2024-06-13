@@ -1,10 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class AudioManager : SingletonBase<AudioManager>
 {
     private AudioSource audioSource;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioSource cheerSource;
     [SerializeField] private AudioClip cheerLowClip;
     [SerializeField] private AudioClip bombAdjacent;
     [SerializeField] private AudioClip bombThunder;
@@ -13,22 +17,44 @@ public class AudioManager : SingletonBase<AudioManager>
     [SerializeField] private AudioClip victoryScreen;
     [SerializeField] private AudioClip bombSimple;
     [SerializeField] private AudioClip mainMusic;
-    private float sfxVolume = 1.0f;
+    [SerializeField] private Slider musicVolume;
+    [SerializeField] private Slider sfxVolume;
+    [SerializeField] private GameObject canvasModal;
+    private EventTrigger eventTrigger;
 
     public override void Awake()
     {
         base.Awake();
         audioSource = GetComponent<AudioSource>();
+        musicVolume.value = audioSource.volume;
+        audioSource.ignoreListenerPause = true;
+        sfxSource.ignoreListenerPause = true;
+        sfxSource.playOnAwake = false;
+        sfxSource.loop = false;
     }
 
-    public void PlayCheerLow()
+    public void Start()
     {
-        PlayMusic(cheerLowClip);
+        musicVolume.onValueChanged.AddListener(_ => 
+        {
+            audioSource.volume = musicVolume.value;
+            cheerSource.volume = musicVolume.value;
+        });
+        eventTrigger = sfxVolume.gameObject.AddComponent<EventTrigger>();
+        EventTrigger.Entry entry = new EventTrigger.Entry();
+        entry.eventID = EventTriggerType.PointerUp;
+        entry.callback.AddListener((data) => { OnSfxSliderPointerUp(); });
+        eventTrigger.triggers.Add(entry);
     }
 
-    private void PlaySFX(AudioClip sfx)
+    void OnSfxSliderPointerUp()
     {
-        AudioSource.PlayClipAtPoint(sfx, Camera.main.transform.position, sfxVolume);
+        PlaySFX(hoverMouseGem);
+    }
+
+    public void PlaySFX(AudioClip sfx)
+    {
+        sfxSource.PlayOneShot(sfx, sfxVolume.value);
     }
 
     private void PlayMusic(AudioClip music)
@@ -71,5 +97,27 @@ public class AudioManager : SingletonBase<AudioManager>
     public void PlayMainMusic()
     {
         PlayMusic(mainMusic);
+    }
+
+    public void CloseVolumeModal()
+    {
+        canvasModal.SetActive(false);
+        Time.timeScale = 1;
+    }
+
+    public void OpenVolumeModal()
+    {
+        Time.timeScale = 0;
+        canvasModal.SetActive(true);
+    }
+
+    public void PlayCheerSound()
+    {
+        cheerSource.Play();
+    }
+
+    public void StopCheerSound()
+    {
+        cheerSource.Stop();
     }
 }

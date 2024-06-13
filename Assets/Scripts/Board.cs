@@ -54,6 +54,11 @@ public class Board : MonoBehaviour
         yOffset = (boardRectTransform.rect.height - (tileSize.y * height)) / 2 - boardRectTransform.rect.height / 2;
     }
 
+    private void Start()
+    {
+        AudioManager.Instance.PlayCheerSound();
+    }
+
     public void SetupBoard()
     {
         SetupTiles();
