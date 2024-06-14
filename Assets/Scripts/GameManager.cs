@@ -51,11 +51,6 @@ public class GameManager : SingletonBase<GameManager>
     private IEnumerator StartGameRoutine()
     {
         ScoreManager.Instance.gameObject.SetActive(false);
-        References references = GameObject.FindWithTag("References")?.GetComponent<References>();
-        if (references != null)
-        {
-            ScoreManager.Instance.UpdateWinnerScreen(references);
-        }
         while (!isReadyToBegin)
         {
             yield return null;

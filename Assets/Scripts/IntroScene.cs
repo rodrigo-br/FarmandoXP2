@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class IntroScene : MonoBehaviour
@@ -8,11 +9,10 @@ public class IntroScene : MonoBehaviour
     private List<Transform> pages;
     private int currentPage;
     private int totalPages;
-    private bool isChangingPage = false;
+    private bool isChangingPage = true;
 
     private void Awake()
     {
-        AudioManager.Instance?.StopCheerSound();
         currentPage = 0;
         pages = new();
         foreach (Transform page in this.transform)
@@ -20,6 +20,20 @@ public class IntroScene : MonoBehaviour
             pages.Add(page);
         }
         totalPages = pages.Count;
+    }
+
+    private void Start()
+    {
+        ScreenFader.Instance.FadeOff(0.3f);
+        AudioManager.Instance.PlayTutorialPageVoice(currentPage);
+        pages[currentPage].gameObject.GetComponentInChildren<Button>()?.onClick.AddListener(() => GameManager.Instance.NextScene());
+        StartCoroutine(UnlockChangingPage());
+    }
+
+    private IEnumerator UnlockChangingPage()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isChangingPage = false;
     }
 
     public void ChangePage()

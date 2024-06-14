@@ -909,10 +909,7 @@ public class Board : MonoBehaviour
         List<GameObject> bombOptions = new List<GameObject>
         {
             adjacentBombPrefabs[(int)MatchValueEnum.Purlple],
-            coloredBombPrefab,
             thunderBombPrefabs[(int)MatchValueEnum.Purlple],
-            thunderBombPrefabs[(int)MatchValueEnum.Purlple],
-            adjacentBombPrefabs[(int)MatchValueEnum.Purlple],
         };
 
         int x = Random.Range(0, width);
@@ -920,5 +917,10 @@ public class Board : MonoBehaviour
         ClearPieceAt(x, y);
         GameObject bomb = MakeBomb(bombOptions[Random.Range(0, bombOptions.Count)], x, y);
         ActivateBomb(bomb);
+        x = Random.Range(0, width);
+        y = Random.Range(0, height);
+        ClearPieceAt(x, y);
+        GameObject bomb2 = MakeBomb(bombOptions[Random.Range(0, bombOptions.Count)], x, y);
+        ActivateBomb(bomb2);
     }
 }
