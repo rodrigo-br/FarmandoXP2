@@ -15,11 +15,14 @@ public class ScoreManager : SingletonBase<ScoreManager>
     private Image levelProgressBar;
     private Level level;
     private int nextLevelScore;
+    private Vector3 defaultScoreSize;
+    private Tweener scoreTextTweener;
 
     public override void Awake()
     {
         base.Awake();
         level = new Level(0, 1000, 2);
+        defaultScoreSize = scoreText.gameObject.transform.localScale;
     }
 
     private void Start()
@@ -92,13 +95,19 @@ public class ScoreManager : SingletonBase<ScoreManager>
 
     public void PunchScore()
     {
-        scoreText.transform.DOPunchScale(Vector3.one * 2, 10f, 5, 0);
+        scoreTextTweener = scoreText.transform.DOPunchScale(Vector3.one * 2, 10f, 5, 0);
         scoreText.color = Color.red;
     }
 
     public void CleanScoreColor()
     {
+        if (scoreTextTweener != null)
+        {
+            scoreTextTweener.Kill();
+            scoreTextTweener = null;
+        }
         scoreText.color = Color.white;
+        scoreText.transform.DOScale(defaultScoreSize, 0.05f);
     }
 
     public void UpdateWinnerScreen(References references)

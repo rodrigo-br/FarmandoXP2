@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,6 +40,8 @@ public class Board : MonoBehaviour
     private ParticleManager particleManager;
     private int scoreMultiplier = 0;
     private BoardDeadlock boardDeadlock;
+    [SerializeField] private RectTransform screenCanvas;
+    private Vector2 defaultCanvasPosition;
 
     private void Awake()
     {
@@ -52,11 +55,13 @@ public class Board : MonoBehaviour
 
         xOffset = (boardRectTransform.rect.width - (tileSize.x * width)) / 2 - boardRectTransform.rect.width / 2;
         yOffset = (boardRectTransform.rect.height - (tileSize.y * height)) / 2 - boardRectTransform.rect.height / 2;
+        defaultCanvasPosition = screenCanvas.anchoredPosition;
     }
 
     private void Start()
     {
         AudioManager.Instance.PlayCheerSound();
+        ScoreManager.Instance.CleanScoreColor();
     }
 
     public void SetupBoard()
@@ -66,13 +71,8 @@ public class Board : MonoBehaviour
         FillBoard(-5);
         if (boardDeadlock.IsDeadlocked(gamePieces, 3))
         {
-            Debug.Log("Deu deadlock");
             ClearBoard();
             StartCoroutine(RefilRoutine());
-        }
-        else
-        {
-            Debug.Log("Sem deadlock");
         }
     }
 
@@ -147,11 +147,19 @@ public class Board : MonoBehaviour
             {
                 AudioManager.Instance.PlayBombAdjacent();
                 AudioManager.Instance.PlayBombThunder();
+                screenCanvas.DOShakeAnchorPos(0.6f, 20, 10, randomnessMode: ShakeRandomnessMode.Harmonic);
+                StartCoroutine(ResetCanvasPositionRoutine(0.61f));
             }
             ClearAndRefillBoard(colorMatches, isAllBombed: true);
             yield break;
         }
         StartCoroutine(SwapGamePiecesCoroutine(gp1, gp2, false));
+    }
+
+    private IEnumerator ResetCanvasPositionRoutine(float waitTime)
+    {
+        yield return new WaitForSeconds(waitTime);
+        screenCanvas.anchoredPosition = defaultCanvasPosition;
     }
 
     private bool IsWithinBounds(int x, int y)
@@ -517,6 +525,8 @@ public class Board : MonoBehaviour
                 if (bombedPieces.Contains(piece) || isAllBombed)
                 {
                     particleManager.ClearBombFXAt(tiles[piece.X, piece.Y]);
+                    screenCanvas.DOShakeAnchorPos(0.4f, 10, 10, randomnessMode: ShakeRandomnessMode.Harmonic);
+                    StartCoroutine(ResetCanvasPositionRoutine(0.41f));
                 }
                 else
                 {
@@ -528,6 +538,8 @@ public class Board : MonoBehaviour
 
     private void ClearBoard()
     {
+        screenCanvas.DOShakeAnchorPos(0.7f, 20, 15, randomnessMode: ShakeRandomnessMode.Harmonic);
+        StartCoroutine(ResetCanvasPositionRoutine(0.71f));
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
@@ -890,5 +902,23 @@ public class Board : MonoBehaviour
             return (bomb.BombType == BombType.Color);
         }
         return false;
+    }
+
+    internal void CreateTwoBombs()
+    {
+        List<GameObject> bombOptions = new List<GameObject>
+        {
+            adjacentBombPrefabs[(int)MatchValueEnum.Purlple],
+            coloredBombPrefab,
+            thunderBombPrefabs[(int)MatchValueEnum.Purlple],
+            thunderBombPrefabs[(int)MatchValueEnum.Purlple],
+            adjacentBombPrefabs[(int)MatchValueEnum.Purlple],
+        };
+
+        int x = Random.Range(0, width);
+        int y = Random.Range(0, height);
+        ClearPieceAt(x, y);
+        GameObject bomb = MakeBomb(bombOptions[Random.Range(0, bombOptions.Count)], x, y);
+        ActivateBomb(bomb);
     }
 }

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : SingletonBase<GameManager>
 {
-    [SerializeField] private int movesLeft = 30;
     private float timeLeft = 60;
     public Observer Observer { get; private set; }
 
@@ -13,7 +12,6 @@ public class GameManager : SingletonBase<GameManager>
     private bool isGameOver = false;
     private bool isWinner = false;
     private Board board;
-    private bool isTimerOn;
 
     public override void Awake()
     {
@@ -44,7 +42,6 @@ public class GameManager : SingletonBase<GameManager>
 
     private IEnumerator ExecuteGameLoop()
     {
-        Debug.Log("ExecuteGameLoop");
         yield return StartCoroutine("StartGameRoutine");
         if (board == null) yield break;
         yield return StartCoroutine("PlayGameRoutine");
@@ -53,7 +50,6 @@ public class GameManager : SingletonBase<GameManager>
 
     private IEnumerator StartGameRoutine()
     {
-        Debug.Log("StartGameRoutine");
         ScoreManager.Instance.gameObject.SetActive(false);
         References references = GameObject.FindWithTag("References")?.GetComponent<References>();
         if (references != null)
@@ -78,7 +74,6 @@ public class GameManager : SingletonBase<GameManager>
         if (board != null)
         {
             timeLeft = 60;
-            isTimerOn = true;
             board.SetupBoard();
             ScoreManager.Instance.UpdateLevelText();
         }
@@ -86,7 +81,6 @@ public class GameManager : SingletonBase<GameManager>
 
     private IEnumerator PlayGameRoutine()
     {
-        Debug.Log("PlayGameRoutine");
         while (!isGameOver)
         {
             timeLeft = Mathf.Clamp(timeLeft - Time.deltaTime, 0, float.MaxValue);
@@ -102,7 +96,6 @@ public class GameManager : SingletonBase<GameManager>
 
     private IEnumerator EndGameRoutine()
     {
-        Debug.Log("EndGameRoutine");
         board = null;
         if (isWinner)
         {
@@ -132,9 +125,7 @@ public class GameManager : SingletonBase<GameManager>
     {
         isWinner = false;
         isGameOver = false;
-        isTimerOn = false;
         timeLeft = 60;
-        Debug.Log("LoadNextSceneRoutine");
         ScreenFader.Instance.FadeOn();
         yield return new WaitForSeconds(1f);
         int nextSceneIndex = SceneManager.GetActiveScene().buildIndex + 1;

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,6 +21,11 @@ public class AudioManager : SingletonBase<AudioManager>
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider sfxVolume;
     [SerializeField] private GameObject canvasModal;
+    [SerializeField] private AudioClip[] tutorialPageVoice;
+    [SerializeField] private GameObject cardCanvas;
+    [SerializeField] private Image cardBackground;
+    [SerializeField] private TextMeshProUGUI cardTitle;
+    [SerializeField]private TextMeshProUGUI cardSubtitle;
     private EventTrigger eventTrigger;
 
     public override void Awake()
@@ -119,5 +125,39 @@ public class AudioManager : SingletonBase<AudioManager>
     public void StopCheerSound()
     {
         cheerSource.Stop();
+    }
+
+    public void PlayTutorialPageVoice(int page)
+    {
+        sfxSource.Stop();
+        sfxSource.clip = tutorialPageVoice[page - 1];
+        sfxSource.Play();
+    }
+
+    public void OpenCardCanvas(Sprite runnerSprite, int index)
+    {
+        if (Time.timeScale == 0) { return; }
+        Time.timeScale = 0;
+        string[,] texts = new string[,]
+        {
+            { "Martina Sandlers", "Habilidade: Explode uma coluna" },
+            {"Luna Swiftwind", "Habilidade: Explode uma linha"},
+            {"Aria Veloce", "Habilidade: Ganha mais tempo"},
+            {"Nova Fleetfoot", "Habilidade: Planta duas bombas"},
+            {"Zara Blitz", "Habilidade: Encoraja suas aliadas"}
+        };
+        canvasModal.SetActive(true);
+        cardCanvas.SetActive(true);
+        cardBackground.sprite = runnerSprite;
+        cardTitle.text = texts[index, 0];
+        cardSubtitle.text = texts[index, 1];
+    }
+
+    public void CloseCardCanvas()
+    {
+        if (Time.timeScale == 1) { return; }
+        cardCanvas.SetActive(false);
+        canvasModal.SetActive(false);
+        Time.timeScale = 1;
     }
 }

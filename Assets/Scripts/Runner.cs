@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class Runner : MonoBehaviour
@@ -98,7 +99,7 @@ public class Runner : MonoBehaviour
 
     private void CreateTwoBombs()
     {
-        board.ExplodeRandomColumn();
+        board.CreateTwoBombs();
     }
 
     private void DoubleSpecialBoost()

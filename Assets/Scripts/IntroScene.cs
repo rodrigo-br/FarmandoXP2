@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class IntroScene : MonoBehaviour
 {
@@ -22,15 +22,12 @@ public class IntroScene : MonoBehaviour
         totalPages = pages.Count;
     }
 
-    private void Update()
+    public void ChangePage()
     {
         if (isChangingPage) { return; }
-        if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
-        {
-            isChangingPage = true;
-            AudioManager.Instance.PlayMouseClick();
-            StartCoroutine(NextPageCoroutine());
-        }
+        isChangingPage = true;
+        AudioManager.Instance.PlayMouseClick();
+        StartCoroutine(NextPageCoroutine());
     }
 
     private IEnumerator NextPageCoroutine()
@@ -41,7 +38,9 @@ public class IntroScene : MonoBehaviour
         currentPage++;
         if (currentPage < totalPages)
         {
+            AudioManager.Instance.PlayTutorialPageVoice(currentPage);
             pages[currentPage].gameObject.SetActive(true);
+            pages[currentPage].gameObject.GetComponentInChildren<Button>()?.onClick.AddListener(() => GameManager.Instance.NextScene());
             yield return new WaitForSeconds(0.2f);
             ScreenFader.Instance.FadeOff(0.3f);
             yield return new WaitForSeconds(0.3f);
