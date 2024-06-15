@@ -357,10 +357,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Britney
+  m_text: Sarah Kepler
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 267d72cd1e5367c40b8c40985f7e2d59, type: 2}
-  m_sharedMaterial: {fileID: -5855073628560358987, guid: 267d72cd1e5367c40b8c40985f7e2d59, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f57036ae883402148b171f7e7ab7e60e, type: 2}
+  m_sharedMaterial: {fileID: -6736783174348057270, guid: f57036ae883402148b171f7e7ab7e60e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -384,8 +384,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -553,7 +553,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac928a0a3b4c7b447806648f115c2244, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movesLeft: 30
 --- !u!1 &458973565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1272,6 +1271,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 643108590}
   m_CullTransparentMesh: 1
+--- !u!1001 &835691790
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4736179554132380758, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_Name
+      value: Audio Source
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.33891603
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.0060915872
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 952.15845
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5685253036830519936, guid: 569bda3771189f04f959795efc46a57f, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 569bda3771189f04f959795efc46a57f, type: 3}
 --- !u!1 &864061326
 GameObject:
   m_ObjectHideFlags: 0
@@ -1305,7 +1361,7 @@ RectTransform:
   m_Father: {fileID: 1366074499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.21}
-  m_AnchorMax: {x: 1, y: 0.8}
+  m_AnchorMax: {x: 0.7444445, y: 0.8}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 1, y: 0.5}
@@ -1329,7 +1385,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4a15c2d19f9114d4f99ba3090ed8f48a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 47b358e6cf33eb84fb9e49e21f0ed9db, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1508,7 +1564,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1353770114}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 326282e3bb21216478ae8d9bd2829c36, type: 3}
+  m_Script: {fileID: 11500000, guid: fe64328e642e58c40ace34b1e790b72a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1366074498
@@ -2187,7 +2243,7 @@ RectTransform:
   m_Father: {fileID: 1366074499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0797037, y: 0.18800001}
-  m_AnchorMax: {x: 0.4832963, y: 0.22874998}
+  m_AnchorMax: {x: 0.5167037, y: 0.24200001}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
@@ -2271,6 +2327,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 8bcb1e9b8a5860741a4e7c3d2888e14e, type: 2}
   - {fileID: 11400000, guid: 1180247a014c44a43bb2f0cfb7e287ce, type: 2}
   - {fileID: 11400000, guid: 815649df97bbff244aeb13a8642314ab, type: 2}
+  - {fileID: 11400000, guid: af780fe35d74a7440bb3e6be562b2522, type: 2}
   <FourStarMessages>k__BackingField:
   - {fileID: 11400000, guid: e161322afa68ad044bdcc2abaff0ebd4, type: 2}
   - {fileID: 11400000, guid: c8087f5bdf11a2646bf6e29e844e353b, type: 2}
@@ -2528,8 +2585,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7211629410778132495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.1, y: 0}
+  m_AnchorMax: {x: 0.9, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2774,8 +2831,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2886,3 +2943,4 @@ SceneRoots:
   - {fileID: 445082639}
   - {fileID: 519152947}
   - {fileID: 2067064882}
+  - {fileID: 835691790}

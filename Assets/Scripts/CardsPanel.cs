@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class CardsPanel : MonoBehaviour
 {
+    [SerializeField] private RectTransform[] cardButtons;
     private void Start()
     {
         ActivateCards(ScoreManager.Instance.GetLevel() + 2);
@@ -13,6 +14,7 @@ public class CardsPanel : MonoBehaviour
         foreach (RectTransform child in this.GetComponent<RectTransform>())
         {
             child.gameObject.SetActive(true);
+            cardButtons[activated].gameObject.SetActive(true);
             activated++;
             if (activated == amount) return;
         }

@@ -15,11 +15,17 @@ public class ScoreManager : SingletonBase<ScoreManager>
     private Image levelProgressBar;
     private Level level;
     private int nextLevelScore;
+    private Vector3 defaultScoreSize;
+    private Tweener scoreTextTweener;
+    private Vector3 defaultTimerSize;
+    private Tweener timerTextTweener;
 
     public override void Awake()
     {
         base.Awake();
         level = new Level(0, 1000, 2);
+        defaultScoreSize = scoreText.gameObject.transform.localScale;
+        defaultTimerSize = timer.gameObject.transform.localScale;
     }
 
     private void Start()
@@ -27,6 +33,12 @@ public class ScoreManager : SingletonBase<ScoreManager>
         UpdateScoreText(level.GetCurrentExperience());
         levelText.text = $"{level.GetLevel() + 1}";
         nextLevelScore = level.GetExperienceForNextLevel();
+    }
+
+    private void OnDisable()
+    {
+        timerTextTweener.Kill();
+        timer.transform.localScale = defaultTimerSize;
     }
 
     public void UpdateTimer(float value)
@@ -87,18 +99,24 @@ public class ScoreManager : SingletonBase<ScoreManager>
 
     public void PunchTimer()
     {
-        timer.transform.DOPunchScale(Vector3.one * 2, 1f, 1, 0);
+        timerTextTweener = timer.transform.DOPunchScale(Vector3.one * 2, 1f, 1, 0);
     }
 
     public void PunchScore()
     {
-        scoreText.transform.DOPunchScale(Vector3.one * 2, 10f, 5, 0);
+        scoreTextTweener = scoreText.transform.DOPunchScale(Vector3.one * 2, 10f, 5, 0);
         scoreText.color = Color.red;
     }
 
     public void CleanScoreColor()
     {
+        if (scoreTextTweener != null)
+        {
+            scoreTextTweener.Kill();
+            scoreTextTweener = null;
+        }
         scoreText.color = Color.white;
+        scoreText.transform.DOScale(defaultScoreSize, 0.05f);
     }
 
     public void UpdateWinnerScreen(References references)
@@ -108,7 +126,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
         references.Score.text = $"{currentScore} / {oldLevelScore}";
 
         float progressPercentage = (float)currentScore / oldLevelScore * 100;
-        int starsToActivate = (int)(progressPercentage / 20);
+        int starsToActivate = Mathf.Clamp((int)(progressPercentage / 20), 0, 5);
         for (int i = 0; i < references.Stars.Length; i++)
         {
             if (i < starsToActivate)
@@ -122,33 +140,42 @@ public class ScoreManager : SingletonBase<ScoreManager>
         }
 
         Messages message = null;
+        int index = 0;
+        Debug.Log($"starsToActivate {starsToActivate}");
         switch (starsToActivate)
         {
             case 0:
-                message = references.ZeroStarMessages[Random.Range(0, references.ZeroStarMessages.Length)];
+                index = Random.Range(0, references.ZeroStarMessages.Length);
+                message = references.ZeroStarMessages[index];
                 break;
             case 1:
-                message = references.OneStarMessages[Random.Range(0, references.OneStarMessages.Length)];
+                index = Random.Range(0, references.OneStarMessages.Length);
+                message = references.OneStarMessages[index];
                 break;
             case 2:
-                message = references.TwoStarMessages[Random.Range(0, references.TwoStarMessages.Length)];
+                index = Random.Range(0, references.TwoStarMessages.Length);
+                message = references.TwoStarMessages[index];
                 break;
             case 3:
-                message = references.ThreeStarMessages[Random.Range(0, references.ThreeStarMessages.Length)];
+                index = Random.Range(0, references.ThreeStarMessages.Length);
+                message = references.ThreeStarMessages[index];
                 break;
             case 4:
-                message = references.FourStarMessages[Random.Range(0, references.FourStarMessages.Length)];
+                index = Random.Range(0, references.FourStarMessages.Length);
+                message = references.FourStarMessages[index];
                 break;
             case 5:
-                message = references.FiveStarMessages[Random.Range(0, references.FiveStarMessages.Length)];
+                index = Random.Range(0, references.FiveStarMessages.Length);
+                message = references.FiveStarMessages[index];
                 break;
 
         }
-        if (message != null)
-        {
-            references.Message.text = message.message;
-            AudioManager.Instance.PlaySFX(message.voice);
-        }
+        Debug.Log($"INDEX: {index}");
+        Debug.Log($"MESSAGE: {message}");
+        references.Message.text = message.message;
+        AudioManager.Instance.PlayCongratulations(message.voice);
+        Debug.Log("VOICE HERE!");
+        Debug.Log(message.voice);
     }
 
     public int GetLevel()

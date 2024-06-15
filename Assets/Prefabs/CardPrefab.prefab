@@ -411,3 +411,4 @@ MonoBehaviour:
   runnerImage: {fileID: 2802293341533783912}
   color: 2
   specialFillRequired: 100
+  specialSkill: 0

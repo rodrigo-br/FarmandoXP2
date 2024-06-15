@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -20,13 +21,20 @@ public class AudioManager : SingletonBase<AudioManager>
     [SerializeField] private Slider musicVolume;
     [SerializeField] private Slider sfxVolume;
     [SerializeField] private GameObject canvasModal;
+    [SerializeField] private List<AudioClip> tutorialPageVoice;
+    [SerializeField] private GameObject cardCanvas;
+    [SerializeField] private Image cardBackground;
+    [SerializeField] private TextMeshProUGUI cardTitle;
+    [SerializeField] private TextMeshProUGUI cardSubtitle;
     private EventTrigger eventTrigger;
 
     public override void Awake()
     {
+        Debug.Log("AudioManager Awake");
         base.Awake();
         audioSource = GetComponent<AudioSource>();
         musicVolume.value = audioSource.volume;
+        cheerSource.volume = musicVolume.value / 2;
         audioSource.ignoreListenerPause = true;
         sfxSource.ignoreListenerPause = true;
         sfxSource.playOnAwake = false;
@@ -35,11 +43,13 @@ public class AudioManager : SingletonBase<AudioManager>
 
     public void Start()
     {
+        Debug.Log("AudioManager Start");
         musicVolume.onValueChanged.AddListener(_ => 
         {
             audioSource.volume = musicVolume.value;
-            cheerSource.volume = musicVolume.value;
+            cheerSource.volume = musicVolume.value / 2;
         });
+        sfxVolume.onValueChanged.AddListener(_ => sfxSource.volume = sfxVolume.value);
         eventTrigger = sfxVolume.gameObject.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerUp;
@@ -55,6 +65,11 @@ public class AudioManager : SingletonBase<AudioManager>
     public void PlaySFX(AudioClip sfx)
     {
         sfxSource.PlayOneShot(sfx, sfxVolume.value);
+    }
+
+    public void PlayCongratulations(AudioClip sfx)
+    {
+        sfxSource.PlayOneShot(sfx, sfxVolume.value * 2);
     }
 
     private void PlayMusic(AudioClip music)
@@ -119,5 +134,39 @@ public class AudioManager : SingletonBase<AudioManager>
     public void StopCheerSound()
     {
         cheerSource.Stop();
+    }
+
+    public void PlayTutorialPageVoice(int page)
+    {
+        sfxSource.Stop();
+        sfxSource.clip = tutorialPageVoice[page];
+        sfxSource.Play();
+    }
+
+    public void OpenCardCanvas(Sprite runnerSprite, int index)
+    {
+        if (Time.timeScale == 0) { return; }
+        Time.timeScale = 0;
+        string[,] texts = new string[,]
+        {
+            { "Martina Sandlers", "Habilidade: Explode uma coluna" },
+            {"Luna Swiftwind", "Habilidade: Explode uma linha"},
+            {"Aria Veloce", "Habilidade: Ganha mais tempo"},
+            {"Nova Fleetfoot", "Habilidade: Planta uma bomba"},
+            {"Zara Blitz", "Habilidade: Encoraja suas aliadas"}
+        };
+        canvasModal.SetActive(true);
+        cardCanvas.SetActive(true);
+        cardBackground.sprite = runnerSprite;
+        cardTitle.text = texts[index, 0];
+        cardSubtitle.text = texts[index, 1];
+    }
+
+    public void CloseCardCanvas()
+    {
+        if (Time.timeScale == 1) { return; }
+        cardCanvas.SetActive(false);
+        canvasModal.SetActive(false);
+        Time.timeScale = 1;
     }
 }
