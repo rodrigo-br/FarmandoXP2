@@ -1,13 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PreIntroScreen : MonoBehaviour
 {
     private List<Transform> pages;
     private int currentPage;
-    private int totalPages;
     private bool isChangingPage = false;
 
     private void Awake()
@@ -18,12 +16,11 @@ public class PreIntroScreen : MonoBehaviour
         {
             pages.Add(page);
         }
-        totalPages = pages.Count;
     }
 
     private void Update()
     {
-        if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
+        if (Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
         {
             if (isChangingPage) { return; }
             isChangingPage = true;

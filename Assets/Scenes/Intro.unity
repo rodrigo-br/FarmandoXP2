@@ -1303,10 +1303,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: OnlyTextPage
       objectReference: {fileID: 0}
-    - target: {fileID: 6216913075941892181, guid: c9ca2bfca9144c4439ec24f9a552263f, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7548437250535071999, guid: c9ca2bfca9144c4439ec24f9a552263f, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5

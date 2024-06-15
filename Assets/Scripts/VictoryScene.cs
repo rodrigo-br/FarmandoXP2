@@ -6,7 +6,6 @@ public class VictoryScene : MonoBehaviour
 {
     private List<Transform> pages;
     private int currentPage;
-    private int totalPages;
     private bool isChangingPage = true;
 
     private void Awake()
@@ -18,7 +17,6 @@ public class VictoryScene : MonoBehaviour
         {
             pages.Add(page);
         }
-        totalPages = pages.Count;
     }
 
     private IEnumerator UnlockChangingPage()

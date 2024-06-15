@@ -17,12 +17,15 @@ public class ScoreManager : SingletonBase<ScoreManager>
     private int nextLevelScore;
     private Vector3 defaultScoreSize;
     private Tweener scoreTextTweener;
+    private Vector3 defaultTimerSize;
+    private Tweener timerTextTweener;
 
     public override void Awake()
     {
         base.Awake();
         level = new Level(0, 1000, 2);
         defaultScoreSize = scoreText.gameObject.transform.localScale;
+        defaultTimerSize = timer.gameObject.transform.localScale;
     }
 
     private void Start()
@@ -30,6 +33,12 @@ public class ScoreManager : SingletonBase<ScoreManager>
         UpdateScoreText(level.GetCurrentExperience());
         levelText.text = $"{level.GetLevel() + 1}";
         nextLevelScore = level.GetExperienceForNextLevel();
+    }
+
+    private void OnDisable()
+    {
+        timerTextTweener.Kill();
+        timer.transform.localScale = defaultTimerSize;
     }
 
     public void UpdateTimer(float value)
@@ -90,7 +99,7 @@ public class ScoreManager : SingletonBase<ScoreManager>
 
     public void PunchTimer()
     {
-        timer.transform.DOPunchScale(Vector3.one * 2, 1f, 1, 0);
+        timerTextTweener = timer.transform.DOPunchScale(Vector3.one * 2, 1f, 1, 0);
     }
 
     public void PunchScore()

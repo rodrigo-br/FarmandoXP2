@@ -342,6 +342,7 @@ public class Board : MonoBehaviour
         {
             playerInputBusy = true;
             clickedTile = tile;
+            gamePieces[tile.X, tile.Y].Image_.color = new Color(0.5f, 0.5f, 0.5f);
         }
     }
 
@@ -357,6 +358,7 @@ public class Board : MonoBehaviour
     {
         if (clickedTile != null && targetTile != null)
         {
+            gamePieces[clickedTile.X, clickedTile.Y].Image_.color = new Color(1f, 1f, 1f);
             SwitchTiles(clickedTile, targetTile);
         }
 

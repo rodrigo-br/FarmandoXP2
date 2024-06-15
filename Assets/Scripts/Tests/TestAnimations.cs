@@ -33,6 +33,11 @@ public class TestAnimations : MonoBehaviour, IPointerEnterHandler, IPointerExitH
         AnimationOutlineOut();
     }
 
+    public void SetDisable(bool value)
+    {
+        disable = value;
+    }
+
     public void OnEnable()
     {
         imageOriginalSize = image.transform.localScale;
