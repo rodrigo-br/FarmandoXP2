@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MatchValueEnum
 {
@@ -22,10 +23,13 @@ public class GamePiece : MonoBehaviour
     public RectTransform RectTransform { get; private set; }
     public bool IsMoving { get; private set; } = false;
     public static event Action<MatchValueEnum, int> OnScorePoints;
+    public Image Image_ { get; private set; } 
 
     private void Awake()
     {
         RectTransform = GetComponent<RectTransform>();
+        Image_ = gameObject.GetComponent<Image>();
+        Debug.Log(Image_);
     }
 
     public void SetCoord(int x, int y, float time = 0.5f)
