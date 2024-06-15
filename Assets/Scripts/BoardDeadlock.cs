@@ -1,8 +1,6 @@
-using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class BoardDeadlock : MonoBehaviour
 {

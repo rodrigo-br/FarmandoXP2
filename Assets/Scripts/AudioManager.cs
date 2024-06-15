@@ -55,7 +55,6 @@ public class AudioManager : SingletonBase<AudioManager>
         entry.eventID = EventTriggerType.PointerUp;
         entry.callback.AddListener((data) => { OnSfxSliderPointerUp(); });
         eventTrigger.triggers.Add(entry);
-        audioSource.Play();
     }
 
     void OnSfxSliderPointerUp()
@@ -153,7 +152,7 @@ public class AudioManager : SingletonBase<AudioManager>
             { "Martina Sandlers", "Habilidade: Explode uma coluna" },
             {"Luna Swiftwind", "Habilidade: Explode uma linha"},
             {"Aria Veloce", "Habilidade: Ganha mais tempo"},
-            {"Nova Fleetfoot", "Habilidade: Planta duas bombas"},
+            {"Nova Fleetfoot", "Habilidade: Planta uma bomba"},
             {"Zara Blitz", "Habilidade: Encoraja suas aliadas"}
         };
         canvasModal.SetActive(true);
