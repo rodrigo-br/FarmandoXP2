@@ -7,7 +7,7 @@ public class VictoryScene : MonoBehaviour
     private List<Transform> pages;
     private int currentPage;
     private int totalPages;
-    private bool isChangingPage = false;
+    private bool isChangingPage = true;
 
     private void Awake()
     {
@@ -21,31 +21,33 @@ public class VictoryScene : MonoBehaviour
         totalPages = pages.Count;
     }
 
+    private IEnumerator UnlockChangingPage()
+    {
+        yield return new WaitForSeconds(0.3f);
+        isChangingPage = false;
+    }
+
     private void Start()
     {
         GameObject referencesGO = GameObject.FindWithTag("References");
         if (referencesGO != null)
         {
             References references = referencesGO.GetComponent<References>();
-            Debug.Log(references);
             if (references != null)
             {
-                Debug.Log($"references.FiveStarMessages: {references.FiveStarMessages}");
-                foreach (Messages message in references.FiveStarMessages)
-                {
-                    Debug.Log(message);
-                    Debug.Log(message.message);
-                    Debug.Log(message.voice);
-                }
                 ScoreManager.Instance.UpdateWinnerScreen(references);
             }
         }
+        ScreenFader.Instance.FadeOff(0.3f);
+        StartCoroutine(UnlockChangingPage());
     }
 
     private void Update()
     {
-        if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1) || Input.GetMouseButtonDown(2))
+        if (isChangingPage) { return; }
+        if (Input.GetMouseButtonDown(0))
         {
+            isChangingPage = true;
             StartCoroutine(NextPageCoroutine());
         }
     }

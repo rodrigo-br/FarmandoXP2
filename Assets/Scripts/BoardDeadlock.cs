@@ -1,6 +1,8 @@
+using DG.Tweening;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BoardDeadlock : MonoBehaviour
 {
@@ -84,7 +86,7 @@ public class BoardDeadlock : MonoBehaviour
         return neighbors;
     }
 
-    private bool HasMoveAt(GamePiece[,] gamePieces, int x, int y, int listLength = 3, bool checkRow = true)
+    private (bool, List<GamePiece>) HasMoveAt(GamePiece[,] gamePieces, int x, int y, int listLength = 3, bool checkRow = true)
     {
         List<GamePiece> pieces = GetRowOrColumnList(gamePieces, x, y, listLength, checkRow);
 
@@ -92,7 +94,7 @@ public class BoardDeadlock : MonoBehaviour
 
         GamePiece unmatchedPiece = null;
 
-        if (pieces == null || matches == null) return false;
+        if (pieces == null || matches == null) return (false, null);
         
         if (pieces.Count == listLength && matches.Count == listLength - 1)
         {
@@ -107,10 +109,12 @@ public class BoardDeadlock : MonoBehaviour
 
             matches = matches.Union(neighbors).ToList();
         }
-        return (matches.Count >= listLength);
+
+        bool hasMatch = matches.Count >= listLength;        
+        return (hasMatch, matches);
     }
 
-    public bool IsDeadlocked(GamePiece[,] gamePieces, int listLength = 3)
+    public (bool isDeadlocked, List<GamePiece> matches) IsDeadlocked(GamePiece[,] gamePieces, int listLength = 3)
     {
         int width = gamePieces.GetLength(0);
         int height = gamePieces.GetLength(1);
@@ -119,12 +123,19 @@ public class BoardDeadlock : MonoBehaviour
         {
             for (int j = 0; j < height; j++)
             {
-                if (HasMoveAt(gamePieces, i, j, listLength, true) || HasMoveAt(gamePieces, i, j, listLength, false))
+                (bool hasMoveRow, List<GamePiece> matchesRow) = HasMoveAt(gamePieces, i, j, listLength, true);
+                if (hasMoveRow)
                 {
-                    return false;
+                    return (false, matchesRow);
+                }
+
+                (bool hasMoveColumn, List<GamePiece> matchesColumn) = HasMoveAt(gamePieces, i, j, listLength, false);
+                if (hasMoveColumn)
+                {
+                    return (false, matchesColumn);
                 }
             }
         }
-        return true; ;
+        return (true, null);
     }
 }

@@ -33,6 +33,11 @@ public class Runner : MonoBehaviour
         staminaBar.fillAmount = 1;
     }
 
+    private void Start()
+    {
+        onBoost = false;
+    }
+
     private void OnEnable()
     {
         GamePiece.OnScorePoints += OnScore;
@@ -52,11 +57,11 @@ public class Runner : MonoBehaviour
         {
             if (specialSkill != SpecialSkill.DoubleSpecialBoost)
             {
-                points *= 2;
+                points = (int)((float)points * 1.5f);
             }
             else
             {
-                points /= 2;
+                points = 4;
             }
         }
 
@@ -99,7 +104,7 @@ public class Runner : MonoBehaviour
 
     private void CreateTwoBombs()
     {
-        board.CreateTwoBombs();
+        board.CreateBomb();
     }
 
     private void DoubleSpecialBoost()
@@ -115,7 +120,7 @@ public class Runner : MonoBehaviour
     {
         onBoost = true;
         ScoreManager.Instance.PunchScore();
-        yield return new WaitForSeconds(10);
+        yield return new WaitForSeconds(6);
         ScoreManager.Instance.CleanScoreColor();
         onBoost = false;
         onBoostCoroutine = null;

@@ -26,7 +26,11 @@ public class IntroScene : MonoBehaviour
     {
         ScreenFader.Instance.FadeOff(0.3f);
         AudioManager.Instance.PlayTutorialPageVoice(currentPage);
-        pages[currentPage].gameObject.GetComponentInChildren<Button>()?.onClick.AddListener(() => GameManager.Instance.NextScene());
+        pages[currentPage].gameObject.GetComponentInChildren<Button>()?.onClick.AddListener(() => {
+            if (isChangingPage) { return; }
+            isChangingPage = true;
+            GameManager.Instance.NextScene();
+            });
         StartCoroutine(UnlockChangingPage());
     }
 
@@ -54,7 +58,11 @@ public class IntroScene : MonoBehaviour
         {
             AudioManager.Instance.PlayTutorialPageVoice(currentPage);
             pages[currentPage].gameObject.SetActive(true);
-            pages[currentPage].gameObject.GetComponentInChildren<Button>()?.onClick.AddListener(() => GameManager.Instance.NextScene());
+            pages[currentPage].gameObject.GetComponentInChildren<Button>()?.onClick.AddListener(() => {
+                if (isChangingPage) { return; }
+                isChangingPage = true;
+                GameManager.Instance.NextScene();
+                });
             yield return new WaitForSeconds(0.2f);
             ScreenFader.Instance.FadeOff(0.3f);
             yield return new WaitForSeconds(0.3f);

@@ -25,7 +25,7 @@ public class AudioManager : SingletonBase<AudioManager>
     [SerializeField] private GameObject cardCanvas;
     [SerializeField] private Image cardBackground;
     [SerializeField] private TextMeshProUGUI cardTitle;
-    [SerializeField]private TextMeshProUGUI cardSubtitle;
+    [SerializeField] private TextMeshProUGUI cardSubtitle;
     private EventTrigger eventTrigger;
 
     public override void Awake()
@@ -49,6 +49,7 @@ public class AudioManager : SingletonBase<AudioManager>
             audioSource.volume = musicVolume.value;
             cheerSource.volume = musicVolume.value / 2;
         });
+        sfxVolume.onValueChanged.AddListener(_ => sfxSource.volume = sfxVolume.value);
         eventTrigger = sfxVolume.gameObject.AddComponent<EventTrigger>();
         EventTrigger.Entry entry = new EventTrigger.Entry();
         entry.eventID = EventTriggerType.PointerUp;

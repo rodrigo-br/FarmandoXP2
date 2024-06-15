@@ -135,7 +135,7 @@ public class GameManager : SingletonBase<GameManager>
 
     public void IncreaseTimer()
     {
-        timeLeft += 10;
+        timeLeft += 3;
         ScoreManager.Instance.PunchTimer();
     }
 }

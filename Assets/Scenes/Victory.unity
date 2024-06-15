@@ -359,8 +359,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Sarah Kepler
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 267d72cd1e5367c40b8c40985f7e2d59, type: 2}
-  m_sharedMaterial: {fileID: -5855073628560358987, guid: 267d72cd1e5367c40b8c40985f7e2d59, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: f57036ae883402148b171f7e7ab7e60e, type: 2}
+  m_sharedMaterial: {fileID: -6736783174348057270, guid: f57036ae883402148b171f7e7ab7e60e, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -384,8 +384,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2243,7 +2243,7 @@ RectTransform:
   m_Father: {fileID: 1366074499}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.0797037, y: 0.18800001}
-  m_AnchorMax: {x: 0.4832963, y: 0.22874998}
+  m_AnchorMax: {x: 0.5167037, y: 0.24200001}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
@@ -2585,8 +2585,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 7211629410778132495}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0.1, y: 0}
+  m_AnchorMax: {x: 0.9, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2831,8 +2831,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
