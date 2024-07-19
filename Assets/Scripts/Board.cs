@@ -89,8 +89,10 @@ public class Board : MonoBehaviour
         var (isDeadlocked, deadLockMatches) = boardDeadlock.IsDeadlocked(gamePieces, 3);
         if (isDeadlocked)
         {
+            GameManager.Instance.Observer.DisableAllGameMaps();
             ClearBoard();
             StartCoroutine(RefilRoutine());
+            GameManager.Instance.Observer.EnableGamePlayMap();
         }
         else
         {
@@ -342,7 +344,11 @@ public class Board : MonoBehaviour
         {
             playerInputBusy = true;
             clickedTile = tile;
-            gamePieces[tile.X, tile.Y].Image_.color = new Color(0.5f, 0.5f, 0.5f);
+            if (gamePieces[tile.X, tile.Y] != null)
+            {
+                gamePieces[tile.X, tile.Y].Image_.color = new Color(0.4f, 0.4f, 0.4f);
+                gamePieces[tile.X, tile.Y].Image_.DOColor(new Color(1, 1, 1), 2f);
+            }
         }
     }
 
@@ -358,8 +364,11 @@ public class Board : MonoBehaviour
     {
         if (clickedTile != null && targetTile != null)
         {
-            gamePieces[clickedTile.X, clickedTile.Y].Image_.color = new Color(1f, 1f, 1f);
-            SwitchTiles(clickedTile, targetTile);
+            if (gamePieces[clickedTile.X, clickedTile.Y] != null)
+            {
+                gamePieces[clickedTile.X, clickedTile.Y].Image_.color = new Color(1f, 1f, 1f);
+                SwitchTiles(clickedTile, targetTile);
+            }
         }
 
         clickedTile = null;
@@ -638,9 +647,16 @@ public class Board : MonoBehaviour
 
         foreach (GamePiece piece in pieces)
         {
-            if (!columns.Contains(piece.X))
+            try
             {
-                columns.Add(piece.X);
+                if (!columns.Contains(piece.X))
+                {
+                    columns.Add(piece.X);
+                }
+            }
+            catch
+            {
+                Debug.Log("DEU BUG DOIDO NO GET COLUMNS");
             }
         }
 
@@ -674,12 +690,14 @@ public class Board : MonoBehaviour
         var (isDeadlocked, deadLockMatches) = boardDeadlock.IsDeadlocked(gamePieces, 3);
         if (isDeadlocked)
         {
+            GameManager.Instance.Observer.DisableAllGameMaps();
             Debug.Log("DEAD LOCKEOU");
             yield return new WaitForSeconds(2.5f);
             Debug.Log("VAI EXPLODIR");
             ClearBoard();
             yield return new WaitForSeconds(1f);
             yield return StartCoroutine(RefilRoutine());
+            GameManager.Instance.Observer.EnableGamePlayMap();
         }
         else
         {
